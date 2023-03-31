@@ -1,0 +1,40 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box" >
+    <img src="../assets/img/brand/logo1.png">
+    <mat-card-header>
+      <mat-card-title class="title">Login</mat-card-title>
+    </mat-card-header>
+    <form class="example-form" [formGroup]="form" (ngSubmit)="login()">
+      <mat-error *ngIf="form.errors" style="padding-bottom: 6px;">
+        Username or password is invalid
+      </mat-error>
+      <mat-card-content>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Eg. Gtee" formControlName="username" [errorStateMatcher]="matcher">
+          <mat-error *ngIf="usernameControl.errors?.['required']">
+            Username is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="usernameControl.errors?.['cannotContainSpace']">
+            Can not contain space
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" [errorStateMatcher]="matcher">
+          <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword?'visibility_off':'visibility'}}</mat-icon>
+          <mat-error *ngIf="passwordControl.errors?.['required']" style="padding: 0;">
+            password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="passwordControl.errors?.['maxlength']">
+            maximum {{ passwordControl.errors?.['maxlength']?.['requiredLength'] }} characters
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" class="btn-block" [disabled]="form.invalid">Log in</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+  <div>{{ token$ | async }}</div>
+</div>
