@@ -1,0 +1,22 @@
+// .content {
+//   padding-top: 10px;
+// }
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+}
+
+.form-field {
+  padding: 0px;
+  width: 260px;
+}
+
+.action {
+  padding: 0px 25px 20px;
+  
+  button {
+    flex: 1;
+  }
+}

@@ -5,7 +5,7 @@
       <mat-card-title class="title">Login</mat-card-title>
     </mat-card-header>
     <form class="example-form" [formGroup]="form" (ngSubmit)="login()">
-      <mat-error *ngIf="form.errors" style="padding-bottom: 6px;">
+      <mat-error *ngIf="error && form.valid" class="form-error">
         Username or password is invalid
       </mat-error>
       <mat-card-content>
@@ -22,7 +22,7 @@
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Password</mat-label>
           <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" [errorStateMatcher]="matcher">
-          <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword?'visibility_off':'visibility'}}</mat-icon>
+          <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword? 'visibility_off' : 'visibility' }}</mat-icon>
           <mat-error *ngIf="passwordControl.errors?.['required']" style="padding: 0;">
             password is <strong>required</strong>
           </mat-error>
@@ -35,6 +35,8 @@
         <button mat-raised-button color="accent" class="btn-block" [disabled]="form.invalid">Log in</button>
       </mat-card-actions>
     </form>
+    <mat-progress-bar *ngIf="form.pending" mode="indeterminate"></mat-progress-bar>
   </mat-card>
-  <div>{{ token$ | async }}</div>
+  
 </div>
+

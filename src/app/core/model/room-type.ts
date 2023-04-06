@@ -4,5 +4,5 @@ export interface RoomType {
   price: number,
   property: string,
   description: string,
-  url:string
+  image:BinaryType
 }

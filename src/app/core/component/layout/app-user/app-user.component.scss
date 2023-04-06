@@ -1,4 +1,19 @@
 
+mat-sidenav-container {
+  height: 100svh;
+}
+
+mat-sidenav, mat-sidenav-content {
+  top: 46px;
+  height: 100%;
+}
+mat-sidenav {
+  width: 16%;
+}
+
+mat-sidenav-content {
+  padding: 40px;
+}
 
 .wrapper {
   height: 88svh;
@@ -25,6 +40,8 @@
     
   }
 }
+
+
 
 
 

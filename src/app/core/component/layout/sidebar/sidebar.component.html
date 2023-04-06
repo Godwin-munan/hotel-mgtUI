@@ -1,42 +1,37 @@
 
-    <div class="sidebar-heading border-bottom bg-light pb-4 pt-4 mt-5"><p> consectetur adipisicing elit. At, sed ab</p></div>
-      <ul class="nav flex-column mb-auto">
-          <li class="nav-item pt-2 pb-2">
-            <a href="#" class="nav-link text-dark" aria-current="page">
-              <i class="bi bi-speedometer2 me-2"></i>
-              Dashboard
+
+
+        
+
+        <div class="userPanel border border-bottom-1" >
+          <div class="d-flex justify-content-md-center">
+            <h2 class="fs-2 fw-normal">Admin</h2>
+          </div>
+          <div class="d-flex justify-content-md-center">
+            <h2 class="fs-6 fw-normal">{{ tokenDetail.first }}</h2>
+          </div>
+          <div class="d-flex justify-content-md-center">
+            <h2 class="fs-6 fw-light">{{ tokenDetail.sub }}</h2>
+          </div>
+
+          <div class="d-flex justify-content-md-center">
+            <a
+              class="fs-6 fw-light"
+              mat-button
+              routerLink="/"
+              matTooltip="profile">
+              <mat-icon class="icon-18">account_circle</mat-icon>
             </a>
-          </li>
-          <li class="nav-item pt-3 pb-3">
-            <a href="#" class="nav-link text-dark  _active">
-              <i class="bi bi-speedometer2 me-2"></i>
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item pt-2 pb-2">
-            <a href="#" class="nav-link text-dark">
-              <i class="bi bi-people-fill me-2"></i>
-              Staff
-            </a>
-          </li>
-          <li class="nav-item pt-2 pb-2">
-            <a href="#" class="nav-link text-dark">
-              <i class="bi bi-buildings-fill me-2"></i>
-              Rooms
-            </a>
-          </li>
-          <li class="nav-item pt-2 pb-2">
-              <a href="#" class="nav-link text-dark">
-                <i class="bi bi-buildings-fill me-2"></i>
-                Room Type
-              </a>
-            </li>
-          <li class="nav-item pt-3 pb-3">
-            <a href="#" class="nav-link text-dark">
-              <i class="bi bi-person-gear"></i>
-              Users
-            </a>
-          </li>
-        </ul>
+          </div>
+
+        </div>
+        <mat-nav-list *ngFor="let item of sideData">
+          <a mat-list-item [routerLink]="[ item.routeLink ]" routerLinkActive="_active" [routerLinkActiveOptions]="{exact: true}">
+            <div class="list-link">
+              <mat-icon class="list-icon">{{ item.icon }}</mat-icon>
+              <span class="button_label">{{ item.label }}</span>
+            </div>
+          </a>
+        </mat-nav-list>
       
 

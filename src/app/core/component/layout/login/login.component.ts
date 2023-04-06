@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Tokens } from 'core/model/tokens';
-import { Observable } from 'rxjs';
-import { AuthEndPoints } from 'shared/constants/api-constants';
-import { ApiServiceService } from 'shared/service/api/api-service.service';
-import { AuthServiceService } from 'shared/service/authentication/auth-service.service';
+import { Observable, Subscription } from 'rxjs';
+import { AuthService } from 'shared/service/authentication/auth-service.service';
 import { MyErrorStateMatcher } from 'shared/service/global/MyErrorStateMatcher';
 import { UsernameValidators } from 'shared/service/global/validators/username-validators';
 
@@ -14,23 +11,26 @@ import { UsernameValidators } from 'shared/service/global/validators/username-va
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   form!: FormGroup;
-  token$!: Observable<string>;
+  error!: boolean;
 
   
 
   showPassword: boolean = false;
 
-  constructor(private _fb: FormBuilder, private authService: AuthServiceService){
+  constructor(private _fb: FormBuilder, public authService: AuthService){
     
     this.form = this._fb.group({
       username: ['', [Validators.required, UsernameValidators.cannotContainSpace],],
       password: ['', {
-        validators: [Validators.required, Validators.maxLength(10)],
+        validators: [Validators.required, Validators.maxLength(10), UsernameValidators.cannotContainSpace],
         updateOn: 'change' 
        }]
     })
+  }
+  ngOnDestroy(){
+    // this.subscription$.unsubscribe();
   }
 
   get passwordControl(){
@@ -46,9 +46,11 @@ export class LoginComponent {
  }
 
  login(){
-  this.authService.getToken(this.usernameControl.value, this.passwordControl.value);
-  this.token$ = this.authService.token$;
+  this.error = false;
+  this.authService.login(this.usernameControl.value, this.passwordControl.value);
+  this.authService.errorStatus$.subscribe(error => this.error = error)
  }
+
 
  matcher = new MyErrorStateMatcher();
 }

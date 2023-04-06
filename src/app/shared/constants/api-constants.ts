@@ -1,3 +1,8 @@
+export enum AppRoles {
+  ADMIN = 'ROLE_ADMIN',
+  USER = 'ROLE_USER'
+}
+
 export enum HttpStatus{
   HTTP_200_OK=200,
   HTTP_201_CREATED = 201,
@@ -62,7 +67,7 @@ export enum InvoiceEndPoints {
 
 export enum JobEndPoints {
   ADD_JOB = "/api/job/add",
-  GET_JOB_PAGE = "/api/job/get/",
+  GET_JOB = "/api/job/get",
   GET_JOB_ID = "/api/job/get/",
   PUT_JOB = "/api/job/update",
   DELETE_JOB = "/api/job/delete/"

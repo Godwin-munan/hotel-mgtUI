@@ -4,27 +4,27 @@
       <span>My App</span>
       <span class="example-spacer"></span>
 
-      <a mat-button class="example-icon" matTooltip="dashboard">
+      <a mat-button class="example-icon" *ngIf="isAdmin" (click)="toggleNav()">
         <mat-icon>settings</mat-icon>
-        <span class="button_label">Dashboard</span> 
+        <span class="button_label">settings</span> 
       </a>
 
-      <a mat-button class="example-icon" matTooltip="rooms">
+      <a mat-button class="example-icon">
         <mat-icon>hotel</mat-icon>
         <span class="button_label">rooms</span> 
       </a>
 
-      <a mat-button class="example-icon" matTooltip="checkin">
+      <a mat-button class="example-icon">
         <mat-icon>beenhere</mat-icon>
         <span class="button_label">checkin</span>
       </a> 
 
-      <a mat-button class="example-icon" matTooltip="guests">
+      <a mat-button class="example-icon">
         <mat-icon>luggage</mat-icon>
         <span class="button_label">guests</span> 
       </a>
 
-      <a mat-raised-button class="example-icon" matTooltip="logout">
+      <a mat-raised-button *ngIf="_authService.isLogin$| async" class="example-icon" (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span class="button_label">logout</span> 
       </a>

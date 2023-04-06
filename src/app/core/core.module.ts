@@ -14,7 +14,7 @@ const COMPONENTS: any[] = [AppUserComponent]
     LoginComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
   ],
   exports: [...COMPONENTS]
 })

@@ -85,3 +85,10 @@ body {
 .title {
   font-weight: 300;
 }
+
+.form-error {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 6px;
+  padding-top: 6px;
+}

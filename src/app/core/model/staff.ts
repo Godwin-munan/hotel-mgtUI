@@ -1,5 +1,5 @@
 import { Gender } from "./gender";
-import { idCard } from "./id-card";
+import { IdCard } from "./id-card";
 import { Job } from "./job";
 import { Shift } from "./shift";
 
@@ -11,7 +11,7 @@ export interface Staff {
   cardNo: string,
   joinDate: Date,
   leaveDate: Date,
-  card: idCard,
+  card: IdCard,
   gender: Gender,
   shift: Shift,
   job: Job

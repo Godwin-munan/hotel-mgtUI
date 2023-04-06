@@ -1,4 +1,4 @@
-export interface idCard {
+export interface IdCard {
   id: number,
   type: string
 }
