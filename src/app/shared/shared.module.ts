@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'app/material/material.module';
@@ -20,6 +20,13 @@ import { ShiftService } from './service/global/shift.service';
 import { JobService } from './service/global/job.service';
 import { IdCardService } from './service/global/id-card.service';
 import { GenderService } from './service/global/gender.service';
+import localeNg from '@angular/common/locales/en-NG';
+import { SnackbarService } from './service/global/snackbar.service';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { SnackbarComponent } from './component/snackbar/snackbar.component';
+
+
+registerLocaleData(localeNg, 'ng');
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -55,6 +62,14 @@ const SERVICES: any[] = [
   JobService,
   IdCardService,
   GenderService,
+  SnackbarService,
+  SnackbarComponent,
+  {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+     useValue: {
+      duration: 1000,
+      
+    }
+  }
  
 ];
 
@@ -65,7 +80,7 @@ const PIPES: any[] = [];
 const SCHEMAS: any[] = [ CUSTOM_ELEMENTS_SCHEMA ]
 
 @NgModule({
-  declarations: [...COMPONENTS, ...DIRECTIVES, ...PIPES, TestComponent],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ...PIPES, TestComponent,],
   imports: [...MODULES],
   providers: [...SERVICES],
   exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES, ...PIPES],

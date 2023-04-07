@@ -47,6 +47,20 @@ export class ApiService {
     );
   }
 
+  delete(api: string, id: number): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.domain}${api}${id}`).pipe(
+      map(reponse => reponse as HttpResponse<any>),
+      catchError(this.handleError)
+    )
+  }
+
+  update<T>(api: string, data: any): Observable<HttpResponse<T>>{
+    return this.http.put(`${this.domain}${api}`, data).pipe(
+      map(response => response as HttpResponse<any>),
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: Response){
 
     if(error.status === 404)

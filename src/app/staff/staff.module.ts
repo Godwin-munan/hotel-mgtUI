@@ -5,6 +5,7 @@ import { SharedModule } from 'shared/shared.module';
 import { StaffComponent } from './component/staff/staff.component';
 import { AddStaffComponent } from './component/add-staff/add-staff.component';
 
+
 const COMPONENTS: any[] = [
   StaffComponent,
   AddStaffComponent

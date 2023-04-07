@@ -42,7 +42,7 @@
     <div class="row">
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Job</mat-label>
-        <mat-select  formControlName="jobTitle" >
+        <mat-select  formControlName="jobTitle">
           <mat-option *ngFor="let job of jobList$ | async" [value]="job.title">{{ job.title }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -61,7 +61,7 @@
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <mat-form-field class="form-field" appearance="fill">
+      <mat-form-field class="form-field" appearance="fill" *ngIf="data">
         <mat-label>Contract termination Date</mat-label>
         <input matInput [matDatepicker]="picker2" formControlName="terminateDate">
         <mat-hint>mm/dd/yyyy</mat-hint>
@@ -71,8 +71,8 @@
     </div>
   </div>
   <div mat-dialog-actions class="action">
-    <button mat-raised-button>Cancel</button>
-    <button mat-raised-button color="primary">Save</button>
+    <button mat-raised-button [mat-dialog-close]="false" color="accent" type="button">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">{{data ? 'Update' : 'Add' }}</button>
   </div>
 </form>
 
