@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModule } from 'staff/staff.module';
 import { PaymentModule } from 'payment/payment.module';
 import { GuestModule } from 'guest/guest.module';
+import { AppUserModule } from './app-user/app-user.module';
+import { RoomModule } from 'room/room.module';
 
 
 
@@ -22,6 +24,8 @@ import { GuestModule } from 'guest/guest.module';
     PaymentModule,
     GuestModule,
     CoreModule,
+    AppUserModule,
+    RoomModule,
     BrowserAnimationsModule
   ],
   providers: [

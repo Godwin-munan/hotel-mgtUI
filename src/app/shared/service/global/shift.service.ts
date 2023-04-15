@@ -19,10 +19,27 @@ export class ShiftService {
     this._apiService.get<Shift[]>(ShiftEndPoints.GET_SHIFT).subscribe({
       next: response => {
         this._shiftList$.next(response.data); 
+        localStorage.setItem('shift', JSON.stringify(response.data));
       },
       error: error => {
 
       }
     })
+  }
+
+  shiftStorageState(state: boolean){
+    if(!state) return;
+    let shift  = this.shiftFromStorage;
+    this._shiftList$.next(JSON.parse(shift))
+  }
+
+  findStorageShiftById(id: number): Shift{
+    let shift = this.shiftFromStorage;
+    let _shift = (JSON.parse(shift) as Shift[]).find((shift: Shift ) => shift.id === id);
+    return _shift as Shift;
+  }
+
+  get shiftFromStorage(): string{
+    return localStorage.getItem('shift') as string;
   }
 }

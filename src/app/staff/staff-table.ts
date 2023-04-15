@@ -7,8 +7,4 @@ export interface staffTable {
   size: number,
   number: number,
   numberOfElements: number,
-  // page: number;
-  // per_page: number;
-  // total: number;
-  // total_pages: number;
 }

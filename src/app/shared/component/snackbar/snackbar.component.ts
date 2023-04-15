@@ -12,7 +12,6 @@ export class SnackbarComponent {
     @Inject(MAT_SNACK_BAR_DATA) public data: any,
     public snackBarRef: MatSnackBarRef<SnackbarComponent>
   ){
-    console.log('show me'+data.message)
-    // snackBarRef._dismissAfter(4000)
+
   }
 }

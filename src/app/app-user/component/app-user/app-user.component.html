@@ -1,0 +1,65 @@
+<div class="main-body">
+  <div class="flex">
+    <mat-form-field>
+      <mat-label>Search by name | username</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jane" #input>
+    </mat-form-field>
+  
+    <span class="example-spacer"></span>
+  
+    <button class="add-user" mat-raised-button (click)="openAddStaffForm()" color="primary">add user</button>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let user">{{ user['id'] }}</td>
+    </ng-container>
+      
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let user">{{ user['firstName'] }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let user">{{ user['lastName'] }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>Username</th>
+      <td mat-cell *matCellDef="let user">{{ user['username'] }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let user">{{ user['role']?.name }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-icon-button color="primary" (click)="openEditStaffForm(user)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteStaff(user?.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <mat-paginator
+    #paginator
+    [length]="totalData"
+    [pageSizeOptions]="pageSizes"
+    showFirstLastButtons
+  ></mat-paginator>
+  </div>
+</div>
+
+

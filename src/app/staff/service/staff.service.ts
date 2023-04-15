@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Staff } from 'core/model/staff';
+import { StaffDto } from 'core/model/staffDto';
 import { BehaviorSubject } from 'rxjs';
 import { StaffEndPoints } from 'shared/constants/api-constants';
 import { ApiService } from 'shared/service/api/api-service.service';
@@ -16,17 +17,12 @@ export class StaffService {
 
   constructor(
     private _apiService: ApiService
-    ) { }
+    ) { 
+      
+    }
 
-  addStaff(staff: Staff){
-    this._apiService.add<Staff>(StaffEndPoints.ADD_STAFF, staff).subscribe({
-      next: response => {
-        
-      },
-      error: error => {
-
-      }
-    })
+  addStaff(staff: StaffDto){
+    return this._apiService.add<Staff>(StaffEndPoints.ADD_STAFF, staff)
   }
 
   getStaffPage(field: string, page: number, size: number){
@@ -37,16 +33,8 @@ export class StaffService {
     return this._apiService.delete(StaffEndPoints.DELETE_STAFF, id)
   }
 
-  updateStaff(data: Staff){
-    this._apiService.update(StaffEndPoints.PUT_STAFF, data).subscribe({
-      next: response => {
-        console.log(response.data);
-      },
-      error: error => {
-
-      }
-    }
-
-    )
+  updateStaff(staff: Staff){
+    return this._apiService.update<Staff>(StaffEndPoints.PUT_STAFF, staff)
+    
   }
 }

@@ -10,18 +10,18 @@ export const SidenavData = [
     label: 'Payments'
   },
   {
-    routeLink: '/rooms',
+    routeLink: '/room',
     icon: 'holiday_village',
-    label: 'Rooms'
+    label: 'Manage Rooms'
   },
   {
     routeLink: '/staff',
     icon: 'people_alt',
-    label: 'Staff'
+    label: 'Manage Staff'
   },
   {
     routeLink: '/user',
     icon: 'manage_accounts',
-    label: 'Users'
+    label: 'Manage Users'
   },
 ];

@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from '@angular/material-moment-adapter'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MatDialogConfig,
@@ -80,7 +81,13 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTooltipModule,
     MatTreeModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    // MatNativeDateModule,
+    MatMomentDateModule
+  ],
+  providers: [
+    {
+       provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } 
+    }
   ]
 })
 export class MaterialModule { }

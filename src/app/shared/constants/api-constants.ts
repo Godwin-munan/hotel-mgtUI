@@ -33,6 +33,16 @@ export enum GenderEndPoints {
 
 }
 
+export enum RoleEndPoints {
+
+  ADD_ROLE = "/api/role/add",
+  GET_ROLE = "/api/role/get",
+  GET_ROLE_ID = "/api/role/get/",
+  PUT_ROLE = "/api/role/update",
+  DELETE_ROLE = "/api/role/delete/"
+
+}
+
 
 export enum GuestEndPoints {
 

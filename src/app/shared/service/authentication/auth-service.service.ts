@@ -10,6 +10,7 @@ import { GenderService } from '../global/gender.service';
 import { JobService } from '../global/job.service';
 import { ShiftService } from '../global/shift.service';
 import { IdCardService } from '../global/id-card.service';
+import { RoleService } from '../global/role.service';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,7 @@ export class AuthService implements OnInit {
     private _jobService: JobService,
     private _shiftService: ShiftService,
     private _idCardService: IdCardService,
+    private _roleService: RoleService,
     private _jwtHelper: JwtHelperService,
     private _router: Router
     ) { 
@@ -41,6 +43,8 @@ export class AuthService implements OnInit {
     this._isLogin$.next(!this.isLogIn(token));
 
     this._tokenDetail$.next(this.tokenDetail);
+
+    this.storageState()
 
   }
   ngOnInit() {
@@ -74,6 +78,11 @@ export class AuthService implements OnInit {
         //Get Id-card list
         this._idCardService.getIdCardList();
 
+       //Get role list
+       this._roleService.getRoleList();
+
+
+
     },
     error: error => {
       this._errorStatus$.next(true);
@@ -87,7 +96,7 @@ export class AuthService implements OnInit {
     let token = this.getToken
     if(!token) return;
 
-    localStorage.removeItem(this.ACCESS_TOKEN);
+    this.removeStorageState();
     this._isLogin$.next(false);
 
     this._router.navigate(['/login']);
@@ -117,6 +126,21 @@ export class AuthService implements OnInit {
     return localStorage.getItem(this.ACCESS_TOKEN) as string;
   }
 
+  storageState(){
+    localStorage.getItem('shift') ? this._shiftService.shiftStorageState(true) : this._shiftService.shiftStorageState(false);
+    localStorage.getItem('job') ? this._jobService.jobStorageState(true) : this._jobService.jobStorageState(false);
+    localStorage.getItem('card') ? this._idCardService.cardStorageState(true) : this._idCardService.cardStorageState(false);
+    localStorage.getItem('gender') ? this._genderService.genderStorageState(true) : this._genderService.genderStorageState(false);
+    localStorage.getItem('role') ? this._roleService.roleStorageState(true) : this._roleService.roleStorageState(false);
+  }
   
+  removeStorageState(){
+    localStorage.removeItem(this.ACCESS_TOKEN);
+    localStorage.removeItem('card');
+    localStorage.removeItem('job');
+    localStorage.removeItem('shift');
+    localStorage.removeItem('gender');
+    localStorage.removeItem('role');
+  }
 
 }

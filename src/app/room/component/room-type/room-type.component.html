@@ -1,0 +1,82 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="!panelOpenState"
+                       (closed)="panelOpenState">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Add Room Type</mat-panel-title>
+      <mat-panel-description>add new room type</mat-panel-description>
+    </mat-expansion-panel-header>
+      
+      <form>
+        <div class="panel-content">
+          <h1 class="form-header">Room Type Form</h1>
+          <div class="row">
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Name</mat-label>
+                <input matInput type="text" placeholder="Presidential suits">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Descriptions</mat-label>
+                <input matInput type="text" placeholder="for important people">
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Properties</mat-label>
+                <input matInput type="text" placeholder="1 Airconditional, 1 bed">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Price</mat-label>
+                <input matInput type="number" placeholder="1,000">
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="form-field">
+              <div>
+                <mat-toolbar>
+                  <input 
+                    matInput 
+                    [value]="selectedFileNames.length ? selectedFileNames : 'Select Images'"
+                   />
+                  <button
+                    mat-flat-button
+                    color="accent"
+                    [disabled]="!selectedFiles"
+                  >
+                    Upload
+                  </button>
+                </mat-toolbar>
+                <input
+                  type="file"
+                  id="fileInput"
+                  name="fileInput"
+                  accept="image/*"
+                />
+              </div>
+            </mat-form-field>
+          </div>
+
+
+          <div class="action">
+            <button mat-raised-button color="primary" type="submit" class="add">add</button>
+          </div>
+        </div>
+      </form>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div >
+  <mat-card>
+    <mat-card-content *ngFor="let type of types">
+      <img mat-card-xl-image src="/src/assets/img/brand/hotel3.jpg" style="height: 200px; width: 200px;">
+        <h1>{{ type }}</h1>
+      
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

@@ -1,0 +1,42 @@
+<div mat-dialog-title>
+  <h1>App User Form</h1>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+      <div class="row">
+          <mat-form-field class="form-field" appearance="fill">
+              <mat-label>First Name</mat-label>
+              <input matInput type="text" placeholder="Ex. Jane"  formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Last Name</mat-label>
+              <input matInput type="text" placeholder="Ex. Doe"  formControlName="lastName">
+          </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="form-field"  appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" placeholder="Ex. example@gmail.com"  formControlName="username">
+        </mat-form-field>
+        <mat-form-field class="form-field"  appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="text" placeholder="xxxxxx"  formControlName="password">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-radio-group  formControlName="roleId">
+        <mat-label><b>Role</b></mat-label>
+          <mat-radio-button *ngFor="let role of roleList$ | async"
+           [value]="role.id">
+            {{ role.name }}
+          </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button [mat-dialog-close]="true" color="accent" type="button">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">{{data ? 'Update' : 'Add' }}</button>
+  </div>
+</form>
+
+

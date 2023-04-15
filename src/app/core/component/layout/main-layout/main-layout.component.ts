@@ -4,11 +4,11 @@ import { AppRoles } from 'shared/constants/api-constants';
 import { AuthService } from 'shared/service/authentication/auth-service.service';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './app-user.component.html',
-  styleUrls: ['./app-user.component.scss']
+  selector: 'main-layout',
+  templateUrl: './main-layout.component.html',
+  styleUrls: ['./main-layout.component.scss']
 })
-export class AppUserComponent { 
+export class MainLayoutComponent { 
   openSidenav = false;
   isAdmin = false;
   isDisplay: boolean = true;

@@ -19,10 +19,27 @@ export class IdCardService {
     this._apiService.get<IdCard[]>(IdCardEndPoints.GET_CID).subscribe({
       next: response => {
         this._idCardList$.next(response.data); 
+        localStorage.setItem('card', JSON.stringify(response.data));
       },
       error: error => {
 
       }
     })
+  }
+
+  cardStorageState(state: boolean){
+    if(!state) return;
+    let card  = this.cardFromStorage;
+    this._idCardList$.next(JSON.parse(card) as IdCard[]);
+  }
+
+  findStorageShiftById(id: number): IdCard{
+    let card = this.cardFromStorage;
+    let _card = (JSON.parse(card) as IdCard[]).find((card: IdCard ) => card.id === id);
+    return _card as IdCard;
+  }
+
+  get cardFromStorage(): string{
+    return localStorage.getItem('card') as string;
   }
 }

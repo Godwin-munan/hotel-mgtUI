@@ -56,7 +56,7 @@ export class ApiService {
 
   update<T>(api: string, data: any): Observable<HttpResponse<T>>{
     return this.http.put(`${this.domain}${api}`, data).pipe(
-      map(response => response as HttpResponse<any>),
+      map(response => response as HttpResponse<T>),
       catchError(this.handleError)
     )
   }

@@ -20,9 +20,10 @@
         </mat-form-field>
     </div>
     <div class="row">
-      <mat-radio-group  formControlName="genderType">
+      <mat-radio-group  formControlName="genderId">
         <mat-label><b>Gender</b></mat-label>
-          <mat-radio-button *ngFor="let gender of genderList$ | async" [value]="gender.type">
+          <mat-radio-button *ngFor="let gender of genderList$ | async"
+           [value]="gender.id">
             {{ gender.type}}
           </mat-radio-button>
       </mat-radio-group>
@@ -30,8 +31,11 @@
     <div class="row">
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>ID card type</mat-label>
-        <mat-select  formControlName="cardType">
-          <mat-option *ngFor="let card of idCardList$ | async" [value]="card.type">{{ card.type }}</mat-option>
+        <mat-select  formControlName="cardId">
+          <mat-option *ngFor="let card of idCardList$ | async" 
+          [value]="card.id">
+          {{ card.type }}
+        </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="form-field" appearance="fill">
@@ -42,14 +46,20 @@
     <div class="row">
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Job</mat-label>
-        <mat-select  formControlName="jobTitle">
-          <mat-option *ngFor="let job of jobList$ | async" [value]="job.title">{{ job.title }}</mat-option>
+        <mat-select  formControlName="jobId">
+          <mat-option *ngFor="let job of jobList$ | async" 
+          [value]="job.id">
+            {{ job.title }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Shift</mat-label>
-        <mat-select formControlName="shiftType">
-          <mat-option *ngFor="let shift of shiftList$ | async" [value]="shift.type">{{ shift.type }}</mat-option>
+        <mat-select formControlName="shiftId">
+          <mat-option *ngFor="let shift of shiftList$ | async" 
+          [value]="shift.id">
+            {{ shift.type }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -59,19 +69,19 @@
         <input matInput [matDatepicker]="picker"  formControlName="employDate">
         <mat-hint>mm/dd/yyyy</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #picker  ng-model="date" ng-model-options="{ timezone: 'utc' }"></mat-datepicker>
       </mat-form-field>
       <mat-form-field class="form-field" appearance="fill" *ngIf="data">
         <mat-label>Contract termination Date</mat-label>
         <input matInput [matDatepicker]="picker2" formControlName="terminateDate">
         <mat-hint>mm/dd/yyyy</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
+        <mat-datepicker #picker2 ng-model="date" ng-model-options="{ timezone: 'utc' }"></mat-datepicker>
       </mat-form-field>
     </div>
   </div>
   <div mat-dialog-actions class="action">
-    <button mat-raised-button [mat-dialog-close]="false" color="accent" type="button">Cancel</button>
+    <button mat-raised-button [mat-dialog-close]="true" color="accent" type="button">Cancel</button>
     <button mat-raised-button color="primary" type="submit">{{data ? 'Update' : 'Add' }}</button>
   </div>
 </form>

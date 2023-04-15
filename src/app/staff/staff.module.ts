@@ -12,11 +12,7 @@ const COMPONENTS: any[] = [
 ]
 
 @NgModule({
-  declarations: [
-    StaffComponent,
-    AddStaffComponent,
-
-  ],
+  declarations: [...COMPONENTS],
   imports: [
     SharedModule,
     StaffRoutingModule,
