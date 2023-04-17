@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,13 +10,15 @@ import { AppUserService } from '../../services/app-user.service';
 import { MatSort } from '@angular/material/sort';
 import { toRoleTable } from 'core/model/custom-map';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-app-user',
   templateUrl: './app-user.component.html',
   styleUrls: ['./app-user.component.scss']
 })
-export class AppUserComponent {
+export class AppUserComponent implements AfterViewInit, OnDestroy{
+  private destroySubject: Subject<void> = new Subject();
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -41,12 +43,19 @@ export class AppUserComponent {
     private cdr: ChangeDetectorRef,
     ){}
 
+
+  ngOnDestroy(): void {
+    this.destroySubject.next();
+  }
+
   
   //Open dialog to add a new staff
   openAddStaffForm(){
     const dialogRef = this._dialog.open(AddUserComponent);
       
-    dialogRef.afterClosed().subscribe({
+    dialogRef.afterClosed().pipe(
+      takeUntil(this.destroySubject)
+    ).subscribe({
       next: value => {
         if(!value){
           this.getUserList();
@@ -62,7 +71,9 @@ export class AppUserComponent {
       data: data
     });
     
-    dialogRef.afterClosed().subscribe({
+    dialogRef.afterClosed().pipe(
+      takeUntil(this.destroySubject)
+    ).subscribe({
       next: value => {
         if(!value){
           this.getUserList();
@@ -75,7 +86,9 @@ export class AppUserComponent {
   //Get staff data table
   getUserList() {
     this.isLoading = true;
-    this._userService.getUserList().subscribe({
+    this._userService.getUserList().pipe(
+      takeUntil(this.destroySubject)
+    ).subscribe({
       next: response => {
         let res = response.data;
         let data = res.map(res => {
@@ -117,8 +130,9 @@ export class AppUserComponent {
 
     if(!confirm('Comfirm to delete staff')) return;
 
-    this._userService.deleteUser(id)
-      .subscribe({
+    this._userService.deleteUser(id).pipe(
+      takeUntil(this.destroySubject)
+    ).subscribe({
         next: response => {
           this._snackbar.openSnackBar(response.message)
           this.getUserList();

@@ -1,0 +1,61 @@
+
+<div *ngFor="let type of roomType$ | async">
+  <mat-card>
+    <mat-card-content>
+      <div class="container-card">
+        <div class="image-container">
+          <img src="../../../../assets/img/brand/hotel-room2.jpg" style="height: 200px; width: 200px; object-fit: cover;">
+        </div>
+        <div class="description-container">
+          <h1>{{ type.name }}</h1>
+          <ul>
+            <li *ngFor="let p of type.properties">{{ p }}</li>
+          </ul>
+          <p class="price">{{ type.price | currency:'NGN':'symbol':'3.2-2':'ng' }}</p>
+          <p class="desc">{{ type.description }}</p>
+          <button
+            mat-raised-button 
+            color="primary" 
+            type="button" 
+            (click)="openEditStaffForm(type)"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+<!-- <div class="container-card">
+  <div class="img-container">
+    <img 
+      class="card-img"
+      mat-card-xl-image
+      src="../../../../assets/img/brand/default-room.png" 
+      style="height: 200px; width: 200px;"
+    >
+  </div>
+  <div class="desc-container">
+    <h1 class="room-name">Suits</h1>
+    <mat-divider></mat-divider>
+    <ul>
+      <li>1 bed</li>
+      <li>2 air-conditional</li>
+      <li>2 air-conditional</li>
+      <li>2 air-conditional</li>
+      <li>2 air-conditional</li>
+    </ul>
+    <mat-divider></mat-divider>
+    <p>NGN 1,000</p>
+    <mat-divider></mat-divider>
+    <p style="width: 550px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus magnam est ipsum earum officia ut, facere aspernatur! Adipisci sapiente, consequatur dolorum, odio eveniet soluta iusto corporis explicabo mollitia totam perspiciatis!</p>
+    <button
+      mat-raised-button 
+      color="primary" 
+      type="button" 
+    >Edit</button>
+  </div>
+</div> -->

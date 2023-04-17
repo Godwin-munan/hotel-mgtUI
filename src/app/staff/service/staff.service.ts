@@ -16,10 +16,8 @@ export class StaffService {
   staffList$ = this._staffList$.asObservable();
 
   constructor(
-    private _apiService: ApiService
-    ) { 
-      
-    }
+    private _apiService: ApiService,
+    ) {}
 
   addStaff(staff: StaffDto){
     return this._apiService.add<Staff>(StaffEndPoints.ADD_STAFF, staff)

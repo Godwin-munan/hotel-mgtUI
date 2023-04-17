@@ -1,0 +1,74 @@
+div {
+  padding: 0rem;
+  margin: 0rem;
+}
+
+.container-card {
+  display: flex;
+  width: 70%;
+  flex-flow: row nowrap;
+  box-shadow: 0.125rem 0.125rem 0.375rem rgba(0, 0, 0, 0.5);
+  border-radius: 0.125rem;
+}
+
+.image-container {
+  flex: none;
+
+  img {
+    height: 12.5rem;
+    width: 12.5rem;
+    object-fit: cover;
+  }
+}
+
+.description-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 0.625rem 1.25rem;
+  background-color: #280f5612;
+
+  h1 {
+    margin: 0rem 0rem .5rem 0rem;
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: rgb(36, 36, 36);
+  }
+
+  p {
+    line-height: 1.5;
+    font-size: 1rem;
+    margin: 0rem;
+    color: #606060;
+  }
+
+  .price {
+    margin: 0rem 0rem .5rem 0rem;
+    font-weight: 400;
+    color: rgb(36, 36, 36);
+    font-size: 1.5rem;
+  }
+
+  .desc {
+    margin-bottom: 1rem;
+  }
+
+  button {
+    margin-top: auto;
+    margin-left: 2.5rem;
+    width: 45%;
+  }
+
+}
+
+ul {
+  list-style-type: none;
+  font-size: 1rem;
+  color: #80837f;
+  padding: 0rem;
+}
+
+mat-divider {
+  padding-bottom: 0.625rem 0;
+}

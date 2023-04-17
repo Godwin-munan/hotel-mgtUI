@@ -7,11 +7,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./room-type.component.scss']
 })
 export class RoomTypeComponent {
+  isLoading: boolean = false;
   panelOpenState = false;
-  types: string[] = ['hello world', 'hello world',];
 
-  selectedFiles!: File;
-  selectedFileNames: string[] = [];
 
 
 

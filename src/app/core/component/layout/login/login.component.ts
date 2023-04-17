@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { AuthService } from 'shared/service/authentication/auth-service.service';
 import { MyErrorStateMatcher } from 'shared/service/global/MyErrorStateMatcher';
 import { UsernameValidators } from 'shared/service/global/validators/username-validators';
@@ -12,6 +12,9 @@ import { UsernameValidators } from 'shared/service/global/validators/username-va
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnDestroy {
+
+  private destroySubject: Subject<void> = new Subject();
+  
   form!: FormGroup;
   error!: boolean;
 
@@ -29,8 +32,9 @@ export class LoginComponent implements OnDestroy {
        }]
     })
   }
+  
   ngOnDestroy(){
-    // this.subscription$.unsubscribe();
+    this.destroySubject.next();
   }
 
   get passwordControl(){
@@ -48,7 +52,9 @@ export class LoginComponent implements OnDestroy {
  login(){
   this.error = false;
   this.authService.login(this.usernameControl.value, this.passwordControl.value);
-  this.authService.errorStatus$.subscribe(error => this.error = error)
+  this.authService.errorStatus$.pipe(
+    takeUntil(this.destroySubject)
+  ).subscribe(error => this.error = error)
  }
 
 

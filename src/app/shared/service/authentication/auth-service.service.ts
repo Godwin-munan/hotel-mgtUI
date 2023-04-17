@@ -1,6 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from '../api/api-service.service';
-import { BehaviorSubject, pipe, tap } from 'rxjs';
+import { BehaviorSubject, Subject, pipe, takeUntil, tap } from 'rxjs';
 import { Tokens } from 'core/model/tokens';
 import { AuthEndPoints, GenderEndPoints } from 'shared/constants/api-constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -11,14 +11,16 @@ import { JobService } from '../global/job.service';
 import { ShiftService } from '../global/shift.service';
 import { IdCardService } from '../global/id-card.service';
 import { RoleService } from '../global/role.service';
+import { RoomTypeService } from 'room/service/room-type.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService implements OnInit, OnDestroy {
 
 
   private readonly ACCESS_TOKEN = 'access_token'
+  private destroySubject: Subject<void> = new Subject();
 
   private _isLogin$ =  new BehaviorSubject<boolean>(false);
   private _errorStatus$ = new BehaviorSubject<boolean>(false)
@@ -37,6 +39,7 @@ export class AuthService implements OnInit {
     private _idCardService: IdCardService,
     private _roleService: RoleService,
     private _jwtHelper: JwtHelperService,
+    private _roomTypeService: RoomTypeService,
     private _router: Router
     ) { 
     const token = this.getToken;
@@ -46,6 +49,9 @@ export class AuthService implements OnInit {
 
     this.storageState()
 
+  }
+  ngOnDestroy(): void {
+    this.destroySubject.next();
   }
   ngOnInit() {
     
@@ -57,11 +63,13 @@ export class AuthService implements OnInit {
     this._apiService.add<Tokens>(AuthEndPoints.LOGIN, {
       username: username,
       password: password
-    }).subscribe({
+    }).pipe(
+      takeUntil(this.destroySubject)
+    ).subscribe({
       next: response => {
       let token = response.data.access_token;
         this._isLogin$.next(true);
-        this._errorStatus$.next(false)
+        this._errorStatus$.next(false);
         localStorage.setItem(this.ACCESS_TOKEN, token);
 
         this._router.navigate(['']);
@@ -77,11 +85,11 @@ export class AuthService implements OnInit {
 
         //Get Id-card list
         this._idCardService.getIdCardList();
-
+        
        //Get role list
        this._roleService.getRoleList();
 
-
+       this._roomTypeService.getRoomTypeList();
 
     },
     error: error => {
@@ -111,7 +119,10 @@ export class AuthService implements OnInit {
 
     isExpired = this._jwtHelper.isTokenExpired(token).valueOf() as boolean;
 
-    if(isExpired) localStorage.removeItem(this.ACCESS_TOKEN)
+    if(isExpired) {
+      localStorage.removeItem(this.ACCESS_TOKEN);
+      this.removeStorageState();
+    }
 
     return isExpired;
   }
@@ -141,6 +152,7 @@ export class AuthService implements OnInit {
     localStorage.removeItem('shift');
     localStorage.removeItem('gender');
     localStorage.removeItem('role');
+    localStorage.removeItem('room-type');
   }
 
 }

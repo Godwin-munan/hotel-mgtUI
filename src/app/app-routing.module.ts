@@ -9,6 +9,7 @@ import { AuthGuard } from 'shared/service/authentication/auth-guard.guard';
 import { StaffComponent } from 'staff/component/staff/staff.component';
 import { AppUserComponent } from './app-user/component/app-user/app-user.component';
 import { RoomBaseComponent } from 'room/component/room-base/room-base.component';
+import { PaymentBaseComponent } from 'payment/component/payment-base/payment-base.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,14 @@ const routes: Routes = [
       {
         path: 'room',
         component: RoomBaseComponent,
+        canActivate: [AdminGuard],
+        data: {
+          role: AppRoles.ADMIN
+        },
+      },
+      {
+        path: 'payment',
+        component: PaymentBaseComponent,
         canActivate: [AdminGuard],
         data: {
           role: AppRoles.ADMIN

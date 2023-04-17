@@ -101,6 +101,7 @@ export enum PayMethodEndPoints {
 export enum RoomEndPoints {
   ADD_RM = "/api/room/add",
   GET_RM_PAGE = "/api/room/get/",
+  GET_RM_TYPE_ID = "/api/room/get/type/",
   GET_RM_ID = "/api/room/get/",
   GET_RM_AVL_COUNT = "/api/room/get/availableCount",
   GET_RM_OCC_COUNT = "/api/room/get/occupiedCount",

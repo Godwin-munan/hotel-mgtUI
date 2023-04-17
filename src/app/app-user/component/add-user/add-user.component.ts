@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserTable } from '../../user-table';
@@ -6,7 +6,7 @@ import { SnackbarService } from 'shared/service/global/snackbar.service';
 import { AppUserService } from '../../services/app-user.service';
 import { AppUser } from 'core/model/app-user';
 import { RoleTable } from 'shared/service/global/role-table';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { RoleService } from 'shared/service/global/role.service';
 
 
@@ -15,7 +15,9 @@ import { RoleService } from 'shared/service/global/role.service';
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss']
 })
-export class AddUserComponent {
+export class AddUserComponent implements OnDestroy{
+
+  private destroySubject: Subject<void> = new Subject();
 
   userForm: FormGroup;
   roleList$: Observable<RoleTable[]>;
@@ -41,6 +43,9 @@ export class AddUserComponent {
 
     })
   }
+  ngOnDestroy(): void {
+    this.destroySubject.next();
+  }
   
 
   ngOnInit(): void {
@@ -64,7 +69,9 @@ export class AddUserComponent {
       if(this.data){
         let user = this.mapFormToUpdateUser(this.userForm.value);
 
-        this._userService.updateUser(user).subscribe({
+        this._userService.updateUser(user).pipe(
+          takeUntil(this.destroySubject)
+        ).subscribe({
           next: () => {
             this._snackbar.openSnackBar('User updated successfully');
             this._dialogRef.close(false);
@@ -75,8 +82,9 @@ export class AddUserComponent {
       }else{
         let user = this.mapFormToAddUser(this.userForm.value)
 
-        this._userService.addUser(user)
-        .subscribe({
+        this._userService.addUser(user).pipe(
+          takeUntil(this.destroySubject)
+        ).subscribe({
           next: () => {
             this._snackbar.openSnackBar('User added successfully');
             this._dialogRef.close(false);

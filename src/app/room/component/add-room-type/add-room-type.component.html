@@ -1,0 +1,66 @@
+<form [formGroup]="roomTypeForm" (ngSubmit)="onFormSubmit()">
+  <div class="panel-content">
+    <h1 class="form-header">Room Type Form</h1>
+    <div class="row">
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Name</mat-label>
+          <input matInput type="text" placeholder="Presidential suits" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Descriptions</mat-label>
+          <input matInput type="text" placeholder="for important people" formControlName="description">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Properties</mat-label>
+          <input matInput type="text" placeholder="1 Airconditional, 1 bed" formControlName="property">
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Price</mat-label>
+          <input matInput type="number" placeholder="1,000" formControlName="price">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field class="form-field">
+        <div>
+          <mat-toolbar>
+            <input 
+              matInput 
+              [value]="selectedFileNames.length ? selectedFileNames : 'Select Images'"
+              formControlName="image"
+             />
+            <button
+              mat-flat-button
+              color="accent"
+              [disabled]="!selectedFiles"
+            >
+              Upload
+            </button>
+          </mat-toolbar>
+          <input
+            type="file"
+            id="fileInput"
+            name="fileInput"
+            accept="image/*"
+          />
+        </div>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="action">
+    <button 
+      mat-raised-button 
+      color="primary" 
+      type="submit" 
+      class="add" 
+      [disabled]="roomTypeForm.pristine"
+    >
+      Add
+    </button>
+  </div>
+</form>
