@@ -7,7 +7,7 @@
         <mat-sidenav #sidenav class="shadow" mode="side" [opened]="openSidenav">
           <core-sidebar [tokenDetail]="tokenDetail"></core-sidebar>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <mat-sidenav-content class="main-content">
           <router-outlet></router-outlet>
           
           <!-- <button (click)="toggleSidenav ? sidenav.open() : sidenav.close()">Open and close</button> -->

@@ -1,0 +1,138 @@
+.invoice-box::before {
+  content: "INVOICE INVOICE";
+  top: 19rem;
+  left: 15rem;
+  transform: rotate(315deg);
+  position: absolute;
+  color: rgba(246, 243, 243, 0.763);
+  font-size: 5rem;
+  font-weight: 700;
+  z-index: -1;
+}
+
+.invoice-box {
+  max-width: 50rem;
+  margin: auto;
+  margin-bottom: 2rem;
+  padding: 1.875rem;
+  border: 0.0625rem solid #eee;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.15);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  color: #555;
+}
+
+.invoice-heading {
+  background-color:#357EBD;
+  color:#FFF;
+  margin-bottom:1em;
+  text-align:center;
+  line-height:2.5em;
+}
+
+.invoice-box table {
+  width: 100%;
+  line-height: inherit;
+  text-align: left;
+}
+
+
+
+.invoice-box table td, th {
+  padding: 0.3125rem;
+  vertical-align: top;
+}
+
+table.desc 
+td:nth-child(2), 
+th:nth-child(2)  {
+  text-align: right;
+}
+
+.information
+td:nth-child(2){
+  text-align: right;
+}
+
+.top-table
+td:nth-child(2) {
+  text-align: right;
+}
+
+.payment
+td:nth-child(3), 
+th:nth-child(3)  {
+  text-align: right;
+}
+
+.desc {
+ padding-bottom: 0.625rem;
+}
+
+.invoice-box table tr.top table td {
+  padding-bottom: 1.25rem;
+}
+
+.invoice-box table tr.top table td.title {
+  font-size: 2.8125rem;
+  line-height: 2.8125rem;
+  color: #333;
+}
+
+.invoice-box table tr.information table td {
+  padding-bottom: 2.5rem;
+}
+
+.invoice-box table tr.heading-1, tr.heading-2 {
+  background-color:#357EBD;
+  color:#FFF;
+  margin-bottom:1em;
+  border-bottom: 0.0625rem solid #ddd;
+  font-weight: bold;
+}
+
+.invoice-box table tr.item td {
+  border-bottom: 0.0625rem solid #eee;
+}
+
+.invoice-box table tr.details td {
+  border-bottom: 0.0625rem solid #eee;
+}
+
+.invoice-box .desc th {
+  border-top: 0.0625rem solid #aba8a8;
+}
+
+.invoice-box .payment th {
+  border-top: 0.0625rem solid #aba8a8;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .invoice-box table tr.top table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  .invoice-box table tr.information table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+/** RTL **/
+.invoice-box.rtl {
+  direction: rtl;
+  font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+}
+
+.invoice-box.rtl table {
+  text-align: right;
+}
+
+.invoice-box.rtl table tr td:nth-child(2) {
+  text-align: left;
+}

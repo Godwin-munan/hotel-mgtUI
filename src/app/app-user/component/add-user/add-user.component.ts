@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserTable } from '../../user-table';
@@ -15,7 +15,7 @@ import { RoleService } from 'shared/service/global/role.service';
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss']
 })
-export class AddUserComponent implements OnDestroy{
+export class AddUserComponent implements OnInit, OnDestroy{
 
   private destroySubject: Subject<void> = new Subject();
 
@@ -43,6 +43,7 @@ export class AddUserComponent implements OnDestroy{
 
     })
   }
+
   ngOnDestroy(): void {
     this.destroySubject.next();
   }
@@ -80,7 +81,7 @@ export class AddUserComponent implements OnDestroy{
         });
 
       }else{
-        let user = this.mapFormToAddUser(this.userForm.value)
+        let user = this.mapFormToAddUser(this.userForm.value);
 
         this._userService.addUser(user).pipe(
           takeUntil(this.destroySubject)

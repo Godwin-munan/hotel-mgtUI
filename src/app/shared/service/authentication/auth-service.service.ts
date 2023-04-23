@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from '../api/api-service.service';
-import { BehaviorSubject, Subject, pipe, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { Tokens } from 'core/model/tokens';
-import { AuthEndPoints, GenderEndPoints } from 'shared/constants/api-constants';
+import { AuthEndPoints } from 'shared/constants/api-constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserToken } from 'core/model/user-token';
 import { Router } from '@angular/router';
@@ -12,15 +12,15 @@ import { ShiftService } from '../global/shift.service';
 import { IdCardService } from '../global/id-card.service';
 import { RoleService } from '../global/role.service';
 import { RoomTypeService } from 'room/service/room-type.service';
+import { PaymentTypeService } from 'payment/service/payment-type.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit, OnDestroy {
+export class AuthService implements OnInit {
 
 
-  private readonly ACCESS_TOKEN = 'access_token'
-  private destroySubject: Subject<void> = new Subject();
+  private readonly ACCESS_TOKEN = 'access_token';
 
   private _isLogin$ =  new BehaviorSubject<boolean>(false);
   private _errorStatus$ = new BehaviorSubject<boolean>(false)
@@ -40,6 +40,7 @@ export class AuthService implements OnInit, OnDestroy {
     private _roleService: RoleService,
     private _jwtHelper: JwtHelperService,
     private _roomTypeService: RoomTypeService,
+    private _paymentTypeService: PaymentTypeService,
     private _router: Router
     ) { 
     const token = this.getToken;
@@ -50,9 +51,7 @@ export class AuthService implements OnInit, OnDestroy {
     this.storageState()
 
   }
-  ngOnDestroy(): void {
-    this.destroySubject.next();
-  }
+ 
   ngOnInit() {
     
   }
@@ -63,9 +62,7 @@ export class AuthService implements OnInit, OnDestroy {
     this._apiService.add<Tokens>(AuthEndPoints.LOGIN, {
       username: username,
       password: password
-    }).pipe(
-      takeUntil(this.destroySubject)
-    ).subscribe({
+    }).subscribe({
       next: response => {
       let token = response.data.access_token;
         this._isLogin$.next(true);
@@ -89,7 +86,11 @@ export class AuthService implements OnInit, OnDestroy {
        //Get role list
        this._roleService.getRoleList();
 
+       //Get room type list
        this._roomTypeService.getRoomTypeList();
+
+       //Get payment type list
+       this._paymentTypeService.getPaymentTypeList();
 
     },
     error: error => {
@@ -143,6 +144,8 @@ export class AuthService implements OnInit, OnDestroy {
     localStorage.getItem('card') ? this._idCardService.cardStorageState(true) : this._idCardService.cardStorageState(false);
     localStorage.getItem('gender') ? this._genderService.genderStorageState(true) : this._genderService.genderStorageState(false);
     localStorage.getItem('role') ? this._roleService.roleStorageState(true) : this._roleService.roleStorageState(false);
+    localStorage.getItem('room-type') ? this._roomTypeService.roomTypeStorageState(true) : this._roomTypeService.roomTypeStorageState(false);
+    localStorage.getItem('payment-method') ? this._paymentTypeService.paymentMethodStorageState(true) : this._paymentTypeService.paymentMethodStorageState(false);
   }
   
   removeStorageState(){
@@ -153,6 +156,7 @@ export class AuthService implements OnInit, OnDestroy {
     localStorage.removeItem('gender');
     localStorage.removeItem('role');
     localStorage.removeItem('room-type');
+    localStorage.removeItem('payment-method');
   }
 
 }

@@ -86,7 +86,9 @@ export enum JobEndPoints {
 export enum PayEndPoints {
   ADD_PAY = "/api/payment/add",
   ADD_PAY_INV_ID = "/api/payment/add/",
+  GET_PAY_INV_CODE = "/api/payment/get/code/",
   GET_PAY_INV_ID = "/api/payment/get/",
+  PUT_PAY = "/api/payment/update",
   REMOVE_PAY = "/api/payment/remove/" 
 }
 
@@ -105,6 +107,8 @@ export enum RoomEndPoints {
   GET_RM_ID = "/api/room/get/",
   GET_RM_AVL_COUNT = "/api/room/get/availableCount",
   GET_RM_OCC_COUNT = "/api/room/get/occupiedCount",
+  GET_RM_TOTAL_COUNT = "/api/room/get/total",
+  GET_RM_AVL_TYPE_ID = "/api/room/get/available/",
   PUT_RM = "/api/room/update",
   DELETE_RM = "/api/room/delete/"
 }
@@ -113,6 +117,7 @@ export enum RoomTypeEndPoints {
   ADD_TYPE = "/api/roomtype/add",
   GET_TYPE = "/api/roomtype/get",
   GET_TYPE_ID = "/api/roomtype/get/",
+  GET_TYPE_COUNT = "/api/roomtype/get/total",
   PUT_TYPE = "/api/roomtype/update",
   DELETE_TYPE = "/api/roomtype/delete/"
 }

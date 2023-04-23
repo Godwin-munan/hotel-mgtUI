@@ -1,7 +1,9 @@
 <header>
   <nav class="fixed-top header-container">
     <mat-toolbar color="accent"  style="height: 50px;" [class.mat-elevation-z2]=true>
-      <span>My App</span>
+      <a routerLink="/home" class="brand-logo">
+        <img src="assets/img/brand/logo/logo_size.png">
+      </a>
       <span class="example-spacer"></span>
 
       <a mat-button class="example-icon" *ngIf="isAdmin" (click)="toggleNav()">
@@ -9,7 +11,7 @@
         <span class="button_label">settings</span> 
       </a>
 
-      <a mat-button class="example-icon">
+      <a mat-button class="example-icon" routerLink="/avl-room">
         <mat-icon>hotel</mat-icon>
         <span class="button_label">rooms</span> 
       </a>

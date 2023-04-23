@@ -30,7 +30,6 @@ export class RoomTypeCardComponent implements OnDestroy{
 
     //Open dialog to Edit an existing user
     openEditStaffForm(data: RoomTypeTable){
-      console.log(data);
       const dialogRef = this._dialog.open(UpdateRoomTypeComponent, {
         data: data
       });

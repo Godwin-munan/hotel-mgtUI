@@ -7,3 +7,18 @@
   flex: 1 1 auto;
 }
 
+img {
+  overflow: hidden;
+  overflow: clip;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand-logo {
+  display: block;
+  padding: 28px 0;
+}
+

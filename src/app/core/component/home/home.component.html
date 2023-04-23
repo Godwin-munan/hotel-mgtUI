@@ -1,0 +1,64 @@
+<div class="row p-5" *ngIf="sum$ | async as sum">
+  <div class="col-4">
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>Available rooms</mat-card-title>
+        <div class="card-inner" *ngIf="availableRoomCount$ | async as available">
+          <p class="mat-body-2 pb-2 mb-1 border-bottom">{{ available | number }}</p>
+          <p class="tx-12 text-muted">{{ (( available / sum) * 100 ) | number:'1.0-0' }}% of rooms</p>
+        </div>
+        <div class="card-icon-wrapper available">
+          <mat-icon role="img" class="mat-icon">home</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-4">
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>Occupied rooms</mat-card-title>
+        <div class="card-inner" *ngIf="occupiedRoomCount$ | async as occupied">
+          <p class="mat-body-2 pb-2 mb-1 border-bottom">{{ occupied | number }}</p>
+          <p class="tx-12 text-muted percent">{{ (( occupied / sum) * 100 ) | number:'1.0-0' }}% of rooms</p>
+        </div>
+        <div class="card-icon-wrapper occupied">
+          <mat-icon role="img" class="mat-icon">check_circle</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-4">
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>Room types</mat-card-title>
+        <div class="card-inner" *ngIf="roomTypeCount$ | async as roomTypeCount">
+          <p class="mat-body-2 pb-2 mb-1 border-bottom">{{ roomTypeCount | number }}</p>
+          <p class="tx-12 text-muted percent">room types</p>
+        </div>
+        <div class="card-icon-wrapper type">
+          <mat-icon role="img" class="mat-icon">stars</mat-icon>
+          <!-- <i class="material-icons">type_specimen</i>  stars -->
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div class="row p-3 justify-content-center">
+  <div class="col-6">
+    <mat-card>
+      <mat-card-content class="mat-card-content">
+        <div class="d-flex justify-content-between statitics-card-header">
+          <h6 class="font-weight-light">GUESTS</h6>
+        </div>
+        <div class="d-flex justify-content-between mt-4 statitics-card-content" *ngIf="currentGuestCount$ | async as guestCount">
+          <div>
+            <h3 class="font-weight-bold">{{ guestCount }}</h3>
+            <h6 class="font-weight-light">Current Guests</h6>
+          </div>
+          <mat-icon role="img" [hidden]="false" class="mat-icon-guest">luggage</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

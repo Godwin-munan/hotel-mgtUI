@@ -2,6 +2,8 @@ import { Role } from "./role";
 import { RoleTable } from "../../shared/service/global/role-table";
 import { RoomTypeTable } from "room/room-type-table";
 import { RoomType } from "./room-type";
+import { RoomTable } from "room/room-table";
+import { Room } from "./room";
 
 export function toRoleTable(role: Role){
 
@@ -25,7 +27,6 @@ export function toRoomType(room: RoomTypeTable){
 
   room.properties.map(property => {
     pro = pro.concat(`${property}, `);
-    console.log(pro)
   })
 
   return new RoomType(
@@ -52,6 +53,15 @@ export function toRoomTypeTable(room: RoomType){
     room.description,
     room.image
   );
+}
+
+export function toRoom(room: RoomTable){
+  return new Room(
+    room.id,
+    room.code,
+    room.status,
+    toRoomType(room.roomType),
+  )
 }
 
 

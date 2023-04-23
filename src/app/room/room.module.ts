@@ -11,6 +11,8 @@ import { ImageUploadComponent } from './component/image-upload/image-upload.comp
 import { AddRoomTypeComponent } from './component/add-room-type/add-room-type.component';
 import { RoomTypeCardComponent } from './component/room-type-card/room-type-card.component';
 import { UpdateRoomTypeComponent } from './component/update-room-type/update-room-type.component';
+import { AddRoomComponent } from './component/add-room/add-room.component';
+import { AvailableRoomComponent } from './component/available-room/available-room.component';
 
 
 const COMPONENTS: any[] = [
@@ -29,7 +31,7 @@ const SERVICES: any[] = [
 
 
 @NgModule({
-  declarations: [...COMPONENTS, UpdateRoomTypeComponent, ],
+  declarations: [...COMPONENTS, UpdateRoomTypeComponent, AddRoomComponent, AvailableRoomComponent, ],
   imports: [
     SharedModule,
     StaffRoutingModule,

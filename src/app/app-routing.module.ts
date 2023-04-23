@@ -10,6 +10,8 @@ import { StaffComponent } from 'staff/component/staff/staff.component';
 import { AppUserComponent } from './app-user/component/app-user/app-user.component';
 import { RoomBaseComponent } from 'room/component/room-base/room-base.component';
 import { PaymentBaseComponent } from 'payment/component/payment-base/payment-base.component';
+import { HomeComponent } from 'core/component/home/home.component';
+import { AvailableRoomComponent } from 'room/component/available-room/available-room.component';
 
 const routes: Routes = [
   {
@@ -18,6 +20,15 @@ const routes: Routes = [
      canActivate: [AuthGuard],
      canActivateChild: [AuthGuard],
      children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
+        path: 'avl-room',
+        component: AvailableRoomComponent,
+      },
       {
         path: 'test',
         component: TestComponent,
@@ -61,7 +72,7 @@ const routes: Routes = [
      ]
   },
   { path: 'login', component: LoginComponent},
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

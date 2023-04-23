@@ -7,8 +7,7 @@ import { GenderEndPoints } from 'shared/constants/api-constants';
 @Injectable({
   providedIn: 'root'
 })
-export class GenderService implements OnDestroy{
-  private destroySubject: Subject<void> = new Subject();
+export class GenderService {
   
   private _genderList$ = new BehaviorSubject<Gender[]>([])
 
@@ -16,14 +15,10 @@ export class GenderService implements OnDestroy{
   genderList$ = this._genderList$.asObservable();
 
   constructor(private _apiService: ApiService) { }
-  ngOnDestroy(): void {
-    this.destroySubject.next();
-  }
+  
 
   getGenderList(){
-    this._apiService.get<Gender[]>(GenderEndPoints.GET_GENDER).pipe(
-      takeUntil(this.destroySubject)
-    ).subscribe({
+    this._apiService.get<Gender[]>(GenderEndPoints.GET_GENDER).subscribe({
       next: response => {
         this._genderList$.next(response.data); 
         localStorage.setItem('gender', JSON.stringify(response.data));

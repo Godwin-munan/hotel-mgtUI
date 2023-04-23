@@ -2,12 +2,12 @@
   <div class="flex">
     <button mat-raised-button [matMenuTriggerFor]="menu">Room type</button>
     <mat-menu  #menu="matMenu">
-      <button mat-menu-item *ngFor="let type of roomTypeList$ | async" (click)="openRoomByTypeForm(type.id)">{{ type.name }}</button>
+      <button mat-menu-item #roomType *ngFor="let type of roomTypeList$ | async" (click)="openRoomByTypeForm(type.id)">{{ type.name }}</button>
     </mat-menu>
   
     <span class="example-spacer"></span>
   
-    <button class="add-staff" mat-raised-button (click)="openAddRoomForm()" color="primary">add staff</button>
+    <button class="add-staff" mat-raised-button (click)="openAddRoomForm()" color="primary">add room</button>
   </div>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
@@ -38,7 +38,7 @@
         <button mat-icon-button color="primary" (click)="openEditRoomForm(room)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteRoom(room?.id)">
+        <button mat-icon-button color="warn" (click)="deleteRoom(room)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>

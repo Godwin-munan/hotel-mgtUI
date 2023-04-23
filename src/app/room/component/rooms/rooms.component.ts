@@ -1,4 +1,5 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +10,8 @@ import { RoomTypeTable } from 'room/room-type-table';
 import { RoomTypeService } from 'room/service/room-type.service';
 import { RoomService } from 'room/service/room.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { AddRoomComponent } from '../add-room/add-room.component';
+import { SnackbarService } from 'shared/service/global/snackbar.service';
 
 @Component({
   selector: 'app-rooms',
@@ -38,6 +41,8 @@ export class RoomsComponent implements OnDestroy{
   constructor(
     private _roomTypeService: RoomTypeService,
     private _roomService: RoomService,
+    private _snackbar: SnackbarService,
+    private _dialog: MatDialog,
   ){
     this.roomTypeList$ =  this._roomTypeService.roomTypeList$;
   }
@@ -74,18 +79,54 @@ export class RoomsComponent implements OnDestroy{
     })
   }
 
-  openEditRoomForm(room: RoomTable){
+  deleteRoom(room: RoomTable){
+
+    if(!confirm('Comfirm to delete Room')) return;
+
+    this._roomService.deleteRoom(room.id).pipe(
+      takeUntil(this.destroySubject)
+    ).subscribe({
+        next: response => {
+          this._snackbar.openSnackBar(response.message)
+          this.getRoomList(room.roomType.id);
+          
+        }
+      });
 
   }
 
-  deleteRoom(id: number){
 
-  }
-
-
+  //Open dialog to add a new Room
   openAddRoomForm(){
+    const dialogRef = this._dialog.open(AddRoomComponent);
     
+    dialogRef.afterClosed().pipe(
+      takeUntil(this.destroySubject)
+    ).subscribe({
+      next: value => {
+        if(!value.state){
+          this.getRoomList(value.id);
+        }
+      }
+    })
   }
+
+    //Open dialog to Edit an existing Room
+    openEditRoomForm(data: RoomTable){
+      const dialogRef = this._dialog.open(AddRoomComponent, {
+        data: data
+      });
+      
+      dialogRef.afterClosed().pipe(
+        takeUntil(this.destroySubject)
+      ).subscribe({
+        next: value => {
+          if(!value.state){
+            this.getRoomList(value.id);
+          }
+        }
+      })
+    }
 
   openRoomByTypeForm(id: number){
     this.getRoomList(id);

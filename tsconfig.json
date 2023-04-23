@@ -31,7 +31,8 @@
       "staff/*": ["app/staff/*"],
       "room/*": ["app/room/*"],
       "app-user/*": ["app/app-user/*"],
-      "env/*": ["environments/*"],
+      "env/*": ["environments/*"], 
+      "assets/*": ["assets/*"],
     },
   },
   "angularCompilerOptions": {

@@ -17,9 +17,7 @@ export class ApiService {
   private domain: string = environment.domain;
   private http = inject(HttpClient);
 
-  constructor() {
-    // this.domain = environment.domain;
-   }
+  constructor() {}
    
   get<T>(api: string): Observable<HttpResponse<T>> {
     return this.http.get(`${this.domain}${api}`).pipe(
@@ -30,13 +28,22 @@ export class ApiService {
 
   getById<T>(id: number ,api: string) : Observable<HttpResponse<T>> {
     return this.http.get(`${this.domain}${api}${id}`).pipe(
-      map(reponse => reponse as HttpResponse<T>)
+      map(reponse => reponse as HttpResponse<T>),
+      catchError(this.handleError)
+    );
+  }
+
+  getByCode<T>(code: string ,api: string) : Observable<HttpResponse<T>> {
+    return this.http.get(`${this.domain}${api}${code}`).pipe(
+      map(reponse => reponse as HttpResponse<T>),
+      catchError(this.handleError)
     );
   }
 
   getPage<T>(api: string, field: string, page: number, size: number) : Observable<HttpResponse<T>> {
     return this.http.get(`${this.domain}${api}${field}/${page}/${size}`).pipe(
-      map(reponse => reponse as HttpResponse<T>)
+      map(reponse => reponse as HttpResponse<T>),
+      catchError(this.handleError)
     );
   }
 
@@ -68,7 +75,6 @@ export class ApiService {
     
 
     if(error.status === 400){
-      console.log(error?.text);
       return throwError(() => new BadRequestError(error));
     }
       

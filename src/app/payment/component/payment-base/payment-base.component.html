@@ -1,95 +1,76 @@
-<div class="invoice-box">
-  <div class="invoice-heading">
-    INVOICE
-  </div>
-  <table cellpadding="0" cellspacing="0">
-    <tr class="top">
-      <td colspan="2">
-        <table class="top-table">
-          <tr>
-            <td class="title">
-              <img src="../../../../assets/img/brand/logo1.png" style="width: 100%; max-width: 300px" />
-            </td>
-
-            <td>
-              Invoice #: 123<br />
-              Created: January 1, 2015<br />
-              Due: February 1, 2015
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-
-    <tr class="information">
-      <td colspan="2">
-        <table>
-          <tr>
-            <td>
-              Feenie Hotel.<br />
-              No. 20 FDA Road Dadin Kowa<br />
-              Jos, Plateau Nigeria
-            </td>
-
-            <td>
-              To.<br />
-              Godwin N. Jethro<br />
-              godwinjethro@gmail.com
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-
-  <table cellpadding="0" cellspacing="0" class="desc">
-    <thead>
-      <tr class="heading-1">
-        <td>Description</td>
-        <td>Price</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="item">
-        <td>Website design</td>
-        <td>$3000.00</td>
-      </tr>
-      <tr class="item last">
-        <td>Late charges</td>
-
-        <td>$00.00</td>
-      </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-          <th>Total</th>
-          <th>$3000.00</th>
-        </tr>
-    </tfoot>
-    
-  </table>
-
-  <table cellpadding="0" cellspacing="0" class="payment">
-      <thead>
-        <tr class="heading-2">
-          <td>Payment Date</td>
-          <td>Payment Method</td>
-          <td>Amount</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="details">
-          <td>February 1, 2015</td>
-          <td>card</td>
-          <td>10000</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th>Payment Total</th>
-          <th></th>
-          <th>10000</th>
-        </tr>
-      </tfoot>
-  </table>
+<div class="invoice-search">
+  <form >
+    <mat-form-field class="my-form-field" subscriptSizing="dynamic"  appearance="outline">
+      <mat-label>Enter invoice Code</mat-label>
+      <input type="text" matInput placeholder="Search" name= "search" [(ngModel)]= "code">
+    </mat-form-field>
+  </form>
+  <button 
+    class="btn"  
+    color="primary" 
+    matSuffix 
+    mat-raised-button
+    (click)="submitSearch()">
+    <mat-icon >search</mat-icon>
+  </button>
 </div>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<div class="payment-detail-container shadow backg" *ngIf="(paymentList && error === false); else noPayment">
+  
+  <h1 class="page-title fs-2 display-2 display-6 mt-3 mb-5">Payment Details</h1>
+    
+    <ng-container *ngIf="invoice">
+      <div class="row">
+        <div class="col ms-3 mb-2">
+          <h2 class="display-2 ms-2">Guest Information</h2>
+          <ul>
+            <li>Guest Code: <span>{{ invoice.guest.guestCode }}</span></li>
+            <li>Name: <span>{{ invoice.guest.firstName }} {{ invoice.guest.lastName }}</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col ms-3 mb-4">
+          <h2 class="display-2 ms-2">Invoice Information</h2>
+          <ul>
+            <li>Invoice Code: <span>{{ invoice.invoiceCode }}</span></li>
+            <li>Invoice Total: <span>{{ invoice.invoiceTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</span></li>
+            <li>Payment Total: <span>{{ invoice.paymentTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</span></li>
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+
+    <hr style="max-width: 30rem; margin: auto; margin-bottom: 1.5rem;">
+    <div class="row container head-ing m-1 justify-content-md-center">
+      <h2 class="col text-center">Payment Date</h2>
+      <h2 class="col text-center">Payment Method</h2>
+      <h2 class="col text-center">Payment Amount</h2>
+      <h2 class="col text-center">Actions</h2>
+    </div>
+    <div 
+      class="row container cont-ent m-1 justify-content-md-center" 
+      style="text-align: center;"
+      *ngFor="let payment of paymentList">
+      <p class="col text-center">{{ payment.paymentDate | date }}</p>
+      <p class="col text-center">{{ payment.paymentMethod.type }}</p>
+      <p class="col text-center">{{ payment.amount | currency:'NGN':'symbol':'3.2-2':'ng' }}</p>
+      <p class="col text-center">
+        <button>
+          <mat-icon class="edit" (click)="updatePayment(payment)">edit</mat-icon>
+        </button>
+        <button>
+          <mat-icon class="delete" (click)="deletePayment(payment.id)">delete</mat-icon>
+        </button>
+      </p> 
+    </div> 
+</div>
+
+<ng-template #noPayment>
+  <div class="default-msg display-6 shadow backg">
+    {{ msg }}
+  </div>
+</ng-template>
+
+
+<!-- <payment-invoice></payment-invoice> -->
