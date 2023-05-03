@@ -12,6 +12,9 @@ import { RoomBaseComponent } from 'room/component/room-base/room-base.component'
 import { PaymentBaseComponent } from 'payment/component/payment-base/payment-base.component';
 import { HomeComponent } from 'core/component/home/home.component';
 import { AvailableRoomComponent } from 'room/component/available-room/available-room.component';
+import { GuestBaseComponent } from 'guest/component/guest-base/guest-base.component';
+import { CheckinComponent } from 'guest/component/checkin/checkin.component';
+import { CheckOutComponent } from 'guest/component/check-out/check-out.component';
 
 const routes: Routes = [
   {
@@ -28,6 +31,18 @@ const routes: Routes = [
       {
         path: 'avl-room',
         component: AvailableRoomComponent,
+      },
+      {
+        path: 'guest',
+        component: GuestBaseComponent,
+      },
+      {
+        path: 'checkin',
+        component: CheckinComponent,
+      },
+      {
+        path: 'checkout',
+        component: CheckOutComponent,
       },
       {
         path: 'test',

@@ -1,0 +1,45 @@
+
+<div class="checkin-container container shadow" *ngIf="!successPage">
+  <div class="title display-6">
+    <h1>Checkin Guest</h1>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <div class="content">
+    <add-guest 
+      [genderList$]="genderList$" 
+      (addGuest)="newGuest($event)" 
+      *ngIf="firstPage"></add-guest>
+    <add-guest-room 
+      *ngIf="lastPage"
+      [guestId]="guestId"
+      [roomTypeList$]="roomTypeList$" 
+      (addRooms)="newRooms($event)">
+    </add-guest-room>
+    <guest-payment 
+      *ngIf="detailPage"
+      [PaymentMethodList$]="PaymentMethodList$"
+      [invoice$]="invoice$"
+      (addPayment)="newPayment($event)">
+    </guest-payment>
+  </div>
+  <div class="footer">
+    <div class="nav-icon">
+      <mat-icon class="icon">{{ firstPage ? 'circle' : 'radio_button_unchecked' }}</mat-icon>
+      <mat-icon class="icon">{{ lastPage ? 'circle' : 'radio_button_unchecked' }}</mat-icon>
+      <mat-icon class="icon">{{ detailPage ? 'circle' : 'radio_button_unchecked' }}</mat-icon>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="successPage">
+  <!-- <div class="checkin-container container shadow successful-container">
+    <h1 class="successful-text">
+      Successfull
+    </h1>
+  </div> -->
+  <payment-invoice [paymentList$]="paymentList$" [invoice$]="invoice$"></payment-invoice>
+</ng-container>
+
+
+
+

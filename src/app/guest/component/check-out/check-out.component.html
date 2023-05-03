@@ -1,0 +1,30 @@
+<div class="checkin-container container shadow" >
+  <div class="title display-6">
+    <h1>Checkout Guest</h1>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+
+  <ng-container *ngIf="invoice$ | async as invoice">
+    <div class="content">
+      <mat-list>
+        <mat-list-item>
+          <span matListItemTitle>Name</span> <span matListItemLine>{{ invoice.guest?.firstName }} {{ invoice.guest?.lastName }}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>Invoice total</span> <span matListItemLine>{{ invoice.invoiceTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>Total Payment</span> <span matListItemLine>{{ invoice.paymentTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="footer">
+      <button class="nav-btn" [disabled]="canCheckOut(invoice)" mat-raised-button color="primary" (click)="submitCheckOut(invoice.guest?.id)">Checkout</button>  
+      <ng-container>
+        <div class="payment-note" *ngIf="canCheckOut(invoice)">
+          complete payment to check out
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

@@ -24,6 +24,9 @@ import localeNg from '@angular/common/locales/en-NG';
 import { SnackbarService } from './service/global/snackbar.service';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './component/snackbar/snackbar.component';
+import { AddPaymentComponent } from './component/add-payment/add-payment.component';
+import { InvoiceService } from './service/invoice.service';
+import { PaymentInvoiceComponent } from './component/payment-invoice/payment-invoice.component';
 
 
 registerLocaleData(localeNg, 'ng');
@@ -63,7 +66,7 @@ const SERVICES: any[] = [
   IdCardService,
   GenderService,
   SnackbarService,
-  SnackbarComponent,
+  InvoiceService,
   {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
      useValue: {
       duration: 1000,
@@ -73,14 +76,18 @@ const SERVICES: any[] = [
  
 ];
 
-const COMPONENTS: any[] = []
+const COMPONENTS: any[] = [
+  SnackbarComponent,
+  AddPaymentComponent, 
+  PaymentInvoiceComponent,
+]
 const DIRECTIVES: any[] = [];
 const PIPES: any[] = [];
 
 const SCHEMAS: any[] = [ CUSTOM_ELEMENTS_SCHEMA ]
 
 @NgModule({
-  declarations: [...COMPONENTS, ...DIRECTIVES, ...PIPES, TestComponent,],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ...PIPES, TestComponent, ],
   imports: [...MODULES],
   providers: [...SERVICES],
   exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES, ...PIPES],

@@ -51,7 +51,7 @@ export enum GuestEndPoints {
   GET_GUEST_PAGE = "/api/guest/get/",
   GET_GUEST_ID = "/api/guest/get/",
   GET_GUEST_COUNT = "/api/guest/get/currentCount",
-  GET_GUEST_CURRENT = "/api/guest/current",
+  GET_GUEST_CURRENT = "/api/guest/get/current",
   PUT_GUEST = "/api/guest/update",
   DELETE_GUEST = "/api/guest/delete/",
   CHECKOUT_GUEST = "/api/guest/checkout"
@@ -87,6 +87,8 @@ export enum PayEndPoints {
   ADD_PAY = "/api/payment/add",
   ADD_PAY_INV_ID = "/api/payment/add/",
   GET_PAY_INV_CODE = "/api/payment/get/code/",
+  GET_PAY_GUEST_CODE = "/api/payment/get/guestCode/",
+  GET_PAY_GUEST_EMAIL = "/api/payment/get/guestEmail/",
   GET_PAY_INV_ID = "/api/payment/get/",
   PUT_PAY = "/api/payment/update",
   REMOVE_PAY = "/api/payment/remove/" 

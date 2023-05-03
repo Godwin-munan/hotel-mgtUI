@@ -4,17 +4,19 @@
   left: 15rem;
   transform: rotate(315deg);
   position: absolute;
-  color: rgba(246, 243, 243, 0.763);
+  color: rgba(213, 206, 206, 0.763);
   font-size: 5rem;
   font-weight: 700;
   z-index: -1;
 }
 
 .invoice-box {
+  background-color: #fff;
   max-width: 50rem;
   margin: auto;
   margin-bottom: 2rem;
   padding: 1.875rem;
+  padding-bottom: 4rem;
   border: 0.0625rem solid #eee;
   box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.15);
   font-size: 1rem;

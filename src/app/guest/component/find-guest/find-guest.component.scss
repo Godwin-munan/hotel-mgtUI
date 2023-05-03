@@ -1,0 +1,91 @@
+.guest-search {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: .8rem;
+
+  .my-form-field {
+    width: 25rem;
+  }
+
+  .btn {
+    margin-left: .3rem;
+    height: 3.4rem;
+    width: 10rem;
+  }
+
+  .btn-guest {
+    margin-right: .3rem;
+    height: 3.4rem;
+    width: 7.9rem;
+  }
+}
+
+.payment-detail-container {
+  margin: auto;
+  max-width: 50rem;
+  border: 0.0625rem solid #eee;
+  border-radius: 0.1875rem;
+  margin-bottom: 2rem;
+  padding-bottom: 3rem;
+
+  .page-title {
+    text-align: center;
+    font-weight: 300;
+  }
+
+  h2 {
+    font-weight: 400;
+    margin-bottom: .2rem;
+  }
+}
+
+
+ul {
+  padding-left: 1rem;
+  list-style: none;
+}
+
+p{
+  font-weight: 200;
+}
+
+
+.head-ing .text-center {
+  margin-bottom: 0.4rem;
+  font-size: 1.0025rem;
+}
+
+.cont-ent .text-center {
+  font-size: 1rem;
+}
+
+.row button {
+  font-size: 1rem;
+  background-color: white; 
+  border: 0;
+
+  .edit {
+    color: blue;
+  }
+
+  .delete {
+    color: red;
+  }
+}
+
+.default-msg {
+  padding: 2rem;
+  font-size: x-large;
+  text-align: center;
+}
+
+.backg {
+  background-color: #fff;
+}
+
+.info-container {
+  padding: 0;
+  margin: 0;
+}

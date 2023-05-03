@@ -1,0 +1,119 @@
+.invoice-search {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: .8rem;
+
+  .my-form-field {
+    width: 25rem;
+  }
+
+  .btn {
+    margin-left: .3rem;
+    height: 3.4rem;
+    width: 10rem;
+  }
+}
+
+.guest-info-container {
+  margin: auto;
+  max-width: 50rem;
+  border: 0.0625rem solid #eee;
+  border-radius: 0.1875rem;
+  margin-bottom: 2rem;
+  padding-bottom: 3rem;
+
+  .page-title {
+    text-align: center;
+    font-weight: 300;
+  }
+
+  .guest-heading-container {
+    width: 100%;
+    background-color: #fff;
+    padding: 0;
+
+    div {
+      width: 20.5rem;
+    }
+
+    span {
+      padding: 1rem;
+      margin: 0 0.5rem 0.5rem 0;
+      border: 0.0125rem solid #fff;
+      background-color: #efefef;
+      background-color: #efefef;
+    }
+  }
+
+  h2 {
+    font-weight: 400;
+    margin-bottom: .2rem;
+  }
+}
+
+
+p{
+  font-weight: 200;
+}
+
+
+.head-ing .text-center {
+  margin-bottom: 0.4rem;
+  font-size: 1.0025rem;
+}
+
+.payment-container{
+  background-color: #efefef;
+  padding: 1rem;
+  border: 0.0025rem solid #dfdbdb;
+
+  .payment-title {
+    text-align: center;
+    padding: 0.5rem 0 1rem 0;
+    max-width: 30rem; margin: auto;
+  }
+}
+
+.btn-container {
+  margin: auto;
+  max-width: 9.5rem;
+
+  .btn-add {
+    margin-top: 1.3rem;
+    height: 2.4rem;
+    width: 9.5rem;
+  }
+
+}
+
+.cont-ent {
+  background-color: #fff;
+  border-radius: 0.1875rem;
+  width: 97%;
+  padding: 0;
+  margin: 0 1rem 0 0;
+  
+  
+  p{
+    border: 0.0025rem solid #dfdbdb;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .text-center {
+    font-size: 1rem;
+  }
+}
+
+.default-msg {
+  padding: 2rem;
+  font-size: x-large;
+  text-align: center;
+}
+
+.backg {
+  background-color: #fff;
+}

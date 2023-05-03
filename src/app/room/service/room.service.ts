@@ -12,10 +12,12 @@ export class RoomService {
   private _availableRoomCount$ = new BehaviorSubject<number>(0);
   private _occupiedRoomCount$ = new BehaviorSubject<number>(0);
   private _sum$ = new BehaviorSubject<number>(0);
+  private _availableRoomList$ = new BehaviorSubject<Room[]>([]);
   
   availableRoomCount$ = this._availableRoomCount$.asObservable();
   occupiedRoomCount$ = this._occupiedRoomCount$.asObservable();
   sum$ = this._sum$.asObservable();
+  availableRoomList$ = this._availableRoomList$.asObservable();
 
   constructor(
     private _apiService: ApiService,
@@ -35,6 +37,17 @@ export class RoomService {
 
   getAvailableRoomByTypeList(id: number){
     return this._apiService.getById<Room[]>(id , RoomEndPoints.GET_RM_AVL_TYPE_ID);
+  }
+
+  availableRoomByTypeList(id: number){
+    this.getAvailableRoomByTypeList(id).subscribe({
+      next: response => {
+        this._availableRoomList$.next(response.data);
+      },
+      error: error => {
+
+      }
+    })
   }
 
   deleteRoom(id: number){

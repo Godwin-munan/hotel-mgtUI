@@ -1,0 +1,99 @@
+<div class="invoice-box">
+  <div class="invoice-heading">
+    INVOICE
+  </div>
+  <ng-container *ngIf="invoice$ | async as invoice">
+    <table cellpadding="0" cellspacing="0">
+      <tr class="top">
+        <td colspan="2">
+          <table class="top-table">
+            <tr>
+              <td class="title">
+                <img src="../../../../assets/img/brand/logo1.png" style="width: 100%; max-width: 300px" />
+              </td>
+  
+              <td>
+                Invoice: {{ invoice.invoiceCode }}<br />
+                Created: {{ invoice.guest?.checkIn | date }}<br />
+                Due: {{ invoice.guest?.expireDate | date }}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+  
+      <tr class="information">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td>
+                Feenie Hotel.<br />
+                No. 20 FDA Road Dadin Kowa<br />
+                Jos, Plateau Nigeria
+              </td>
+  
+              <td>
+                To.<br />
+                {{ invoice.guest?.firstName }} {{ invoice.guest?.lastName }}<br />
+                {{ invoice.guest?.email }}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  
+    <table cellpadding="0" cellspacing="0" class="desc">
+      <thead>
+        <tr class="heading-1">
+          <td>Description</td>
+          <td>Price</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="item" *ngFor="let room of invoice.guest?.rooms">
+          <td>{{ room.roomType.name }}</td>
+          <td>{{ room.roomType.price | currency:'NGN':'symbol':'3.2-2':'ng'  }}</td>
+        </tr>
+        <tr class="item last">
+          <td>Late charges</td>
+          <td>{{ invoice.lateCharges | currency:'NGN':'symbol':'3.2-2':'ng'  }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+          <tr>
+            <th>Total</th>
+            <th>{{ invoice.invoiceTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</th>
+          </tr>
+      </tfoot>
+      
+    </table>
+    <ng-container *ngFor="let payment of paymentList$ | async">
+      <table cellpadding="0" cellspacing="0" class="payment">
+        <thead>
+          <tr class="heading-2">
+            <td>Payment Date</td>
+            <td>Payment Method</td>
+            <td>Amount</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="details">
+            <td>{{ payment.paymentDate | date  }}</td>
+            <td>{{ payment.paymentMethod.type }}</td>
+            <td>{{ payment.amount | currency:'NGN':'symbol':'3.2-2':'ng' }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Payment Total</th>
+            <th></th>
+            <th>{{ invoice.paymentTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</th>
+          </tr>
+        </tfoot>
+    </table>
+    </ng-container>
+  </ng-container>
+</div>
+
+

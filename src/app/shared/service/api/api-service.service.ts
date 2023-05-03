@@ -54,6 +54,13 @@ export class ApiService {
     );
   }
 
+  addById<T>(api: string, id: number, data: any ): Observable<HttpResponse<T>> {
+    return this.http.post(`${this.domain}${api}${id}`, data).pipe(
+      map(reponse => reponse as HttpResponse<T>),
+      catchError(this.handleError)
+    );
+  }
+
   delete(api: string, id: number): Observable<HttpResponse<any>> {
     return this.http.delete(`${this.domain}${api}${id}`).pipe(
       map(reponse => reponse as HttpResponse<any>),

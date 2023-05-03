@@ -1,0 +1,58 @@
+<div class="guest-search">
+  <button class="btn-guest" mat-raised-button [matMenuTriggerFor]="menu">Search</button>
+  <mat-menu class="menu"  #menu="matMenu">
+      <button mat-menu-item #roomType (click)="onCode()">Guest Code</button>
+      <button mat-menu-item #roomType (click)="onEmail()">Guest Email</button>
+  </mat-menu>
+  <form >
+    <mat-form-field
+      *ngIf="isCode"
+      class="my-form-field" 
+      subscriptSizing="dynamic"  
+      appearance="outline">
+      <mat-label>Enter Guest Code</mat-label>
+      <input 
+        type="text" 
+        matInput 
+        placeholder="Search" 
+        name= "code" 
+        [(ngModel)]= "code">
+    </mat-form-field>
+    <mat-form-field 
+      *ngIf="!isCode"
+      class="my-form-field" 
+      subscriptSizing="dynamic"  
+      appearance="outline">
+      <mat-label>Enter Guest Email</mat-label>
+      <input 
+        type="text" 
+        matInput 
+        placeholder="Search" 
+        name= "email" 
+        [(ngModel)]= "email">
+    </mat-form-field>
+  </form>
+  <button 
+    class="btn"  
+    color="primary" 
+    matSuffix 
+    mat-raised-button
+    (click)="submitSearch()">
+    <mat-icon >search</mat-icon>
+  </button>
+</div>
+<mat-progress-bar mode="indeterminate" *ngIf="inLoading$ | async"></mat-progress-bar>
+
+<ng-container class="info-container" *ngIf="paymentList$ | async as paymentList">
+  <guest-info 
+    *ngIf="paymentList[0]"
+    [paymentList$]="paymentList$"
+    [invoice$]="invoice$"
+    (updatePage)="updatePage($event)"></guest-info>
+</ng-container>
+
+<ng-container *ngIf="error$ | async as error">
+  <div class="default-msg display-6 shadow backg" *ngIf="error.state === true">
+    {{ error.msg }}
+  </div>
+</ng-container>

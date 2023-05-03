@@ -11,17 +11,17 @@
         <span class="button_label">settings</span> 
       </a>
 
-      <a mat-button class="example-icon" routerLink="/avl-room">
+      <a mat-button class="example-icon" [routerLink]="['avl-room']">
         <mat-icon>hotel</mat-icon>
         <span class="button_label">rooms</span> 
       </a>
 
-      <a mat-button class="example-icon">
+      <a mat-button class="example-icon" [routerLink]="['checkin']">
         <mat-icon>beenhere</mat-icon>
         <span class="button_label">checkin</span>
       </a> 
 
-      <a mat-button class="example-icon">
+      <a mat-button class="example-icon" [routerLink]="['guest']">
         <mat-icon>luggage</mat-icon>
         <span class="button_label">guests</span> 
       </a>

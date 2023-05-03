@@ -1,0 +1,73 @@
+<!-- <div *ngIf="invoice$ | async as paymentList">
+  {{ paymentList | json }}
+</div> -->
+
+<div class="guest-info-container shadow backg">
+  
+  <h1 class="page-title fs-2 display-2 mt-3 mb-5">Guest Information</h1>
+    
+  <ng-container *ngIf="invoice$ | async as invoice">
+    <div class="guest-heading-container ps-2 mb-2">
+      <div class="row container">
+        <span class="col shadow">Name</span>
+        <span class="col shadow">{{ invoice.guest?.firstName }} {{ invoice.guest?.lastName }}</span>
+      </div>
+      <div class="row container">
+        <span class="col shadow">Guest Code</span>
+        <span class="col shadow">{{ invoice.guest?.guestCode }}</span>
+      </div>
+      <div class="row container">
+        <span class="col shadow">Invoice Code</span>
+        <span class="col shadow">{{ invoice.invoiceCode }}</span>
+      </div>
+      <div class="row container">
+        <span class="col shadow">Invoice Total</span>
+        <span class="col shadow">{{ invoice.invoiceTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</span>
+      </div>
+      <div class="row container">
+        <span class="col shadow">Payment Total</span>
+        <span class="col shadow">{{ invoice.paymentTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</span>
+      </div>
+      <div class="row container">
+        <span class="col shadow">Balance</span>
+        <span class="col shadow">{{ balance(invoice.invoiceTotal, invoice.paymentTotal) | currency:'NGN':'symbol':'3.2-2':'ng' }}</span>
+      </div>
+
+    </div>
+
+    <div class="payment-container mt-3">
+      <h2 class="payment-title display-6">Room Info</h2>
+      <div 
+        *ngFor="let room of invoice.guest?.rooms"
+        class="row container cont-ent m-1 justify-content-center shadow"
+        style="text-align: center;">
+        <p class="col">{{ room.roomType.name }}</p>
+        <p class="col">{{ room.code }}</p>
+        <!-- <p class="col">{{ payment.amount | currency:'NGN':'symbol':'3.2-2':'ng' }}</p> -->
+      </div>
+    </div>
+    <div class="payment-container mt-3">
+      <h2 class="payment-title display-6">Payment Info</h2>
+      <div 
+        *ngFor="let payment of paymentList$ | async"
+        class="row container cont-ent m-1 justify-content-center shadow"
+        style="text-align: center;">
+        <p class="col">{{ payment.paymentDate | date }}</p>
+        <p class="col">{{ payment.paymentMethod.type }}</p>
+        <p class="col">{{ payment.amount | currency:'NGN':'symbol':'3.2-2':'ng' }}</p>
+      </div>
+      <div class="btn-container">
+        <button 
+          class="btn-add"  
+          color="primary" 
+          matSuffix 
+          mat-raised-button
+          [disabled]="invoice.invoiceTotal === invoice.paymentTotal"
+          (click)="openAddPaymentForm(invoice.id, invoice.guest?.email)">
+            Add Payment
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  
+</div>

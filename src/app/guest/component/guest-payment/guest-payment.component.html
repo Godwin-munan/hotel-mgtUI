@@ -1,0 +1,85 @@
+<!-- <ng-container >
+  <div *ngIf="invoice$ | async as invoice">
+    <div>
+      {{ invoice.guest?.guestCode }}
+    </div>
+  </div>
+  <button mat-raised-button>Make Payment</button>
+</ng-container> -->
+<div *ngIf="invoice$ | async as invoice">
+  <!-- <div class="search-container">
+    <button class="btn-guest" color="primary" mat-raised-button [matMenuTriggerFor]="menu">Room type</button>
+    <mat-menu class="menu"  #menu="matMenu">
+        <button mat-menu-item #roomType *ngFor="let type of roomTypeList$ | async" (click)="getRooms(type.id)">{{ type.name }}</button>
+    </mat-menu>
+  </div> -->
+  <div class="result-container">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Guest Detail</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+              <span matListItemTitle>Guest Code</span> <span matListItemLine>{{ invoice.guest?.guestCode }}</span>
+          </mat-list-item>
+          <mat-list-item>
+              <span matListItemTitle>Name</span> <span matListItemLine>{{ invoice.guest?.firstName }} {{ invoice.guest?.lastName }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Email</span> <span matListItemLine>{{ invoice.guest?.email }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Invoice Code</span> <span matListItemLine>{{ invoice.invoiceCode }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Invoice Total</span> <span matListItemLine>{{ invoice.invoiceTotal | currency:'NGN':'symbol':'3.2-2':'ng' }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>  
+  </div>
+  <div class="list-container">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Make First Payment</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <form [formGroup]="guestPaymentForm" (ngSubmit)="onFormSubmit(invoice.id)">
+          <div class="row">
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Payment Method</mat-label>
+              <mat-select  formControlName="paymentMethodId">
+                <mat-option 
+                  *ngFor="let method of PaymentMethodList$ | async" 
+                  [value]="method.id">
+                    {{ method.type }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+              <mat-form-field class="form-field" appearance="fill">
+                  <mat-label>Amount</mat-label>
+                  <input matInput type="number" placeholder="Ex. 1,000"  formControlName="amount">
+              </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Payment Date</mat-label>
+              <input matInput [matDatepicker]="picker"  formControlName="date">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="nav-btn-container">
+            <button class="nav-btn" mat-raised-button color="primary">Make payment</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+
+
+

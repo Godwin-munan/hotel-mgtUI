@@ -1,0 +1,40 @@
+.checkin-container {
+  max-width: 43.75rem;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+  border-radius: 1.5px;
+
+  .title{
+    text-align: center;
+    padding: 1rem;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  .content {
+    padding-bottom: .5rem;
+  }
+
+  .footer {
+    text-align: center;
+
+    .nav-btn{
+      width: 10rem;
+      padding: .7rem;
+    }
+
+    .payment-note {
+      margin: auto;
+      text-align: center;
+      padding: .5rem;
+      margin-top: .7rem;
+      border-radius: .2rem;
+      color: #fff;
+      max-width: 14rem;
+      background-color: rgb(245, 175, 175);
+    }
+  }
+}

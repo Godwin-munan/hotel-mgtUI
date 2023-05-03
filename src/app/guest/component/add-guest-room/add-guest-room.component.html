@@ -1,0 +1,48 @@
+<div>
+  <div class="search-container">
+    <button class="btn-guest" color="primary" mat-raised-button [matMenuTriggerFor]="menu">Room type</button>
+    <mat-menu class="menu"  #menu="matMenu">
+        <button mat-menu-item #roomType *ngFor="let type of roomTypeList$ | async" (click)="getRooms(type.id)">{{ type.name }}</button>
+    </mat-menu>
+  </div>
+  <div class="result-container">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-subtitle>Available rooms</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-selection-list #rooms>
+          <mat-list-option 
+            *ngFor="let room of availableRoomList$ | async"
+            [value]="room.id"
+            (click)="showroom(room)"
+             #roomId>
+            {{ room.code }}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-card-content>
+    </mat-card>  
+  </div>
+  <div class="list-container">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-subtitle>Selected room</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-chip-listbox>
+          <mat-chip *ngFor="let room of selectedRoom">
+            {{ room?.code }}
+            <button matChipRemove (click)="removeRoom(room)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+        </mat-chip-listbox>
+      </mat-card-content>
+      <mat-card-actions class="room-submit">
+        <button mat-raised-button color="primary" [disabled]="selectedRoom.size < 1" (click)="submitRoomList()">submit</button>
+      </mat-card-actions>
+    </mat-card>
+
+
+  </div>
+</div>

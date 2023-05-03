@@ -1,0 +1,57 @@
+.search-container {
+  text-align: center;
+  padding-bottom: 1rem;
+
+}
+
+.result-container {
+  margin-bottom: 1rem;
+}
+
+.list-container{
+  .room-submit{
+    text-align: center;
+  }
+}
+
+.mat-mdc-list-item-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+}
+
+.form-field {
+  padding: 0px;
+  width: 260px;
+}
+
+.action {
+  padding: 0px 25px 20px;
+  
+  button {
+    flex: 1;
+  }
+}
+
+.nav-btn-container {
+  text-align: center;
+  padding-bottom: .5rem;
+
+  .nav-btn{
+    width: 10rem;
+    padding: .5rem;
+  }
+}
+
+mat-list {
+  padding: 0;
+}
+
+.card-content {
+  padding: 2rem 0 0 1rem;
+}

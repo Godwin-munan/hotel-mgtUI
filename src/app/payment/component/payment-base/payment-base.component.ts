@@ -1,11 +1,12 @@
-import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnDestroy } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Invoice } from 'core/model/invoice';
 import { Payment } from 'core/model/payment';
 import { PaymentService } from 'payment/service/payment.service';
 import { Subject, takeUntil } from 'rxjs';
 import { UpdatePaymentComponent } from '../update-payment/update-payment.component';
 import { SnackbarService } from 'shared/service/global/snackbar.service';
+import { AddPaymentComponent } from 'shared/component/add-payment/add-payment.component';
 
 @Component({
   selector: 'app-payment-base',
@@ -40,7 +41,7 @@ export class PaymentBaseComponent implements OnDestroy{
   getPaymentList(code: string){
     this.isLoading = true;
 
-    this._paymentService.getPaymentListByCode(code).pipe(
+    this._paymentService.getPaymentListByInvoiceCode(code).pipe(
       takeUntil(this.destroySubject)
     ).subscribe({
       next: response => {
@@ -71,10 +72,11 @@ export class PaymentBaseComponent implements OnDestroy{
   }
 
   updatePayment(data: Payment){
-
-    const dialogRef = this._dialog.open(UpdatePaymentComponent, {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
       data: data
-    });
+    };
+    const dialogRef = this._dialog.open(AddPaymentComponent, dialogConfig);
     
     dialogRef.afterClosed().pipe(
       takeUntil(this.destroySubject)
