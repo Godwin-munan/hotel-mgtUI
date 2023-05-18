@@ -40,6 +40,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 
@@ -82,7 +83,8 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTreeModule,
     MatDatepickerModule,
     // MatNativeDateModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    ClipboardModule
   ],
   providers: [
     {

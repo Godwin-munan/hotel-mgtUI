@@ -5,35 +5,33 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  min-height: 100vh;
+  min-height: 100svh;
   background: #e2e2e2;
 }
 
-.login-wrapper {
-  height: 100%;
-}
-.box {
+.box{
   position: relative;
   top: 0;
   opacity: 1;
   float: left;
-  padding: 20px 50px 40px 50px;
+  padding: 1.25rem 3.125rem 2.5rem 3.125rem;
   width: 100%;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   transform: scale(1);
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   z-index: 5;
-  max-width: 330px;
-  box-shadow: 2px 2px 2px 1px rgba(1, 6, 54, 0.2);
+  // max-width: 32.25rem;
+  max-width: 30.25rem;
+  box-shadow: 0.125rem 0.125rem 0.125rem 0.0625rem rgba(1, 6, 54, 0.2);
 }
 
 .box.back {
   transform: scale(.95);
   -webkit-transform: scale(.95);
   -ms-transform: scale(.95);
-  top: -20px;
+  top: -1.25rem;
   opacity: .8;
   z-index: -1;
 }
@@ -42,6 +40,7 @@ body {
 // #B90E0A rgba(185, 14, 10, 0.8)
 
 .login-wrapper{
+  height: 99.5svh;
   background-image: linear-gradient(to right bottom, rgba(224, 17, 155, 0.8), rgba(194, 30, 86, 0.8)), url('/assets/img/brand/hotel-room-min.jpg');
   background-position: top;
   -webkit-background-size: cover;
@@ -50,14 +49,35 @@ body {
   background-size: cover;
 }
 
+.progress-container {
+  margin: 0;
+  padding: 0;
+  height: .5svh;
+  background-image: linear-gradient(to right bottom, rgba(224, 17, 155, 0.8), rgba(194, 30, 86, 0.8));
+}
+
 .login-wrapper .example-form {
+  text-align: center;
   min-width: 100%;
   max-width: 300px;
   width: 100%;
 }
 .login-wrapper .example-full-width,
 .login-wrapper .btn-block {
-  width: 100%;
+  width: 24rem;
+}
+
+.btn-block {
+  width: 24rem;
+  padding: 1.6rem 7rem 1.6rem 7rem;
+  margin: auto;
+  margin-bottom: 3rem;
+
+  mat-progress-spinner {
+    max-width: 2rem;
+    max-width: 2rem;
+    color: #fff;
+  }
 }
 .login-wrapper mat-card-header {
   text-align: center;
@@ -66,15 +86,15 @@ body {
   font-weight: 700;
 }
 .login-wrapper mat-card-header mat-card-title {
-  font-size: 30px;
+  font-size: 1.875rem;
   margin: 0;
 }
 .login-wrapper .mat-card {
-  padding: 40px 70px 50px;
+  padding: 2.5rem 4.375rem 3.125rem;
 }
 .login-wrapper .mat-stroked-button {
-  border: 1px solid currentColor;
-  line-height: 54px;
+  border: 0.0625rem solid currentColor;
+  line-height: 3.375rem;
   background: #FFF7FA;
 }
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
@@ -89,14 +109,31 @@ mat-card-header {
   padding: 0;
 }
 
+mat-card-content {
+  padding: 0;
+}
+
+mat-card-actions {
+  padding: 0;
+  text-align: center;
+}
+
 .form-error {
+  margin: auto;
+  margin-top: .5rem;
+  margin-bottom: .7rem;
+  color: red;
+  font-size: medium;
+  font-weight: 400;
+  background-color: rgb(241, 220, 220);
+  width: 24rem;
   display: flex;
   justify-content: center;
-  padding-bottom: 6px;
-  padding-top: 6px;
+  border-radius: 0.125rem;
+  padding: 1rem 0 1rem 0;
 }
 
 img {
-  width: 150px;
-  height: 100px;
+  width: 9.375rem;
+  height: 6.25rem;
 }

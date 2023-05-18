@@ -14,6 +14,8 @@ import { UsernameValidators } from 'shared/service/global/validators/username-va
 export class LoginComponent implements OnDestroy {
 
   private destroySubject: Subject<void> = new Subject();
+
+  isLoading$: Observable<boolean>;
   
   form!: FormGroup;
   error!: boolean;
@@ -22,7 +24,7 @@ export class LoginComponent implements OnDestroy {
 
   showPassword: boolean = false;
 
-  constructor(private _fb: FormBuilder, public authService: AuthService){
+  constructor(private _fb: FormBuilder, public _authService: AuthService){
     
     this.form = this._fb.group({
       username: ['', [Validators.required, UsernameValidators.cannotContainSpace],],
@@ -31,6 +33,8 @@ export class LoginComponent implements OnDestroy {
         updateOn: 'change' 
        }]
     })
+
+    this.isLoading$ = this._authService.isLoading$;
   }
   
   ngOnDestroy(){
@@ -51,12 +55,13 @@ export class LoginComponent implements OnDestroy {
 
  login(){
   this.error = false;
-  this.authService.login(this.usernameControl.value, this.passwordControl.value);
-  this.authService.errorStatus$.pipe(
+  
+  this._authService.login(this.usernameControl.value, this.passwordControl.value);
+
+  this._authService.errorStatus$.pipe(
     takeUntil(this.destroySubject)
   ).subscribe(error => this.error = error)
  }
-
 
  matcher = new MyErrorStateMatcher();
 }

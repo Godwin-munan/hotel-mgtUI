@@ -23,13 +23,15 @@ export class AuthService implements OnInit {
   private readonly ACCESS_TOKEN = 'access_token';
 
   private _isLogin$ =  new BehaviorSubject<boolean>(false);
-  private _errorStatus$ = new BehaviorSubject<boolean>(false)
+  private _errorStatus$ = new BehaviorSubject<boolean>(false);
   private _tokenDetail$ = new BehaviorSubject<Partial<UserToken>>({});
+  private _isLoading$ = new BehaviorSubject<boolean>(false);
 
 
   isLogin$ = this._isLogin$.asObservable();
   errorStatus$ = this._errorStatus$.asObservable();
   tokenDetail$ = this._tokenDetail$.asObservable();
+  isLoading$ = this._isLoading$.asObservable();
 
   constructor(
     private _apiService: ApiService,
@@ -58,19 +60,23 @@ export class AuthService implements OnInit {
 
   //Get token for login
   login(username: string, password: string){
+    this._isLoading$.next(true);
 
     this._apiService.add<Tokens>(AuthEndPoints.LOGIN, {
       username: username,
       password: password
-    }).subscribe({
+    })
+    .subscribe({
       next: response => {
-      let token = response.data.access_token;
+
+        let token = response.data.access_token;
+
         this._isLogin$.next(true);
         this._errorStatus$.next(false);
         localStorage.setItem(this.ACCESS_TOKEN, token);
 
         this._router.navigate(['']);
-
+        
         //Get gender list 
         this._genderService.getGenderList();
 
@@ -83,18 +89,21 @@ export class AuthService implements OnInit {
         //Get Id-card list
         this._idCardService.getIdCardList();
         
-       //Get role list
-       this._roleService.getRoleList();
+      //Get role list
+      this._roleService.getRoleList();
 
-       //Get room type list
-       this._roomTypeService.getRoomTypeList();
+      //Get room type list
+      this._roomTypeService.getRoomTypeList();
 
-       //Get payment type list
-       this._paymentTypeService.getPaymentTypeList();
+      //Get payment type list
+      this._paymentTypeService.getPaymentTypeList();
 
+      this._isLoading$.next(false);
+      
     },
     error: error => {
       this._errorStatus$.next(true);
+      this._isLoading$.next(false);
     }
     })
     

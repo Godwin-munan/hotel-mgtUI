@@ -1,3 +1,7 @@
+@mixin start_unit {
+  margin: 0;
+  padding: 0;
+}
 
 .main-body {
   margin: 0 auto;
@@ -21,6 +25,27 @@ mat-form-field {
   margin-bottom: .5rem;
   width: 40%;
 }
+
+.copy-btn {
+  @include start_unit;
+  border-radius: 20%;
+  border: 0;
+  padding-top: 0.4rem;
+  background-color: #fff;
+
+
+  mat-icon {
+    font-size: .8rem !important;
+    @include start_unit;
+    color: rgb(67, 65, 65);
+    max-height: 1rem;
+  }
+}
+
+.copy-btn:hover {
+  background-color: rgb(246, 243, 243);
+}
+
 
 .checkout-guest{
   color: #11c95e;

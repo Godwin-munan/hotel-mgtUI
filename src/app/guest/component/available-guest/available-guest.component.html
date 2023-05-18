@@ -20,7 +20,11 @@
 
     <ng-container matColumnDef="guestCode">
       <th mat-header-cell *matHeaderCellDef>Guest Code</th>
-      <td mat-cell *matCellDef="let guest">{{ guest['guestCode'] }}</td>
+      <td mat-cell *matCellDef="let guest">{{ guest['guestCode'] }}
+        <button class="copy-btn" (click)="copyToClipboard(guest['guestCode'])">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </td>
     </ng-container>
       
     <ng-container matColumnDef="firstName">

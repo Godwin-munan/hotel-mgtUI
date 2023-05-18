@@ -97,6 +97,9 @@ export class AvailableGuestComponent implements OnDestroy{
       ) /(1000 * 60 * 60 * 24));
   }
 
+  copyToClipboard(guestCode: any){
+    navigator.clipboard.writeText(guestCode);
 
+  }
 
 }
