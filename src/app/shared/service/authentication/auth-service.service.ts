@@ -1,6 +1,6 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '../api/api-service.service';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject,} from 'rxjs';
 import { Tokens } from 'core/model/tokens';
 import { AuthEndPoints } from 'shared/constants/api-constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -17,7 +17,7 @@ import { PaymentTypeService } from 'payment/service/payment-type.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService {
 
 
   private readonly ACCESS_TOKEN = 'access_token';
@@ -52,10 +52,6 @@ export class AuthService implements OnInit {
 
     this.storageState()
 
-  }
- 
-  ngOnInit() {
-    
   }
 
   //Get token for login
