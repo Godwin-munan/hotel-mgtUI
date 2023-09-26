@@ -33,6 +33,7 @@
       "app-user/*": ["app/app-user/*"],
       "env/*": ["environments/*"], 
       "assets/*": ["assets/*"],
+      "@hotelmgt/store/*": ["app/store/*"],
     },
   },
   "angularCompilerOptions": {

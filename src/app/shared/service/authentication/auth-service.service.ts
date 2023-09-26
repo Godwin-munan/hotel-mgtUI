@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '../api/api-service.service';
-import { BehaviorSubject,} from 'rxjs';
+import { BehaviorSubject, Observable, map,} from 'rxjs';
 import { Tokens } from 'core/model/tokens';
 import { AuthEndPoints } from 'shared/constants/api-constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -13,6 +13,8 @@ import { IdCardService } from '../global/id-card.service';
 import { RoleService } from '../global/role.service';
 import { RoomTypeService } from 'room/service/room-type.service';
 import { PaymentTypeService } from 'payment/service/payment-type.service';
+import { LoginInfo } from 'core/model/login-info';
+import { HttpResponse } from 'core/utils/http-response';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +55,11 @@ export class AuthService {
     this.storageState()
 
   }
+
+  signIn(credential: LoginInfo)  : Observable<Tokens> { return this._apiService.add<Tokens>(AuthEndPoints.LOGIN, {
+      username: credential.username,
+      password: credential.password
+    }).pipe(map(res => res.data as Tokens )) }
 
   //Get token for login
   login(username: string, password: string){

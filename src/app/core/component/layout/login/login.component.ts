@@ -1,5 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { startLogin } from '@hotelmgt/store/index';
+import { Store } from '@ngrx/store';
+import { LoginInfo } from 'core/model/login-info';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { AuthService } from 'shared/service/authentication/auth-service.service';
 import { MyErrorStateMatcher } from 'shared/service/global/MyErrorStateMatcher';
@@ -24,7 +27,12 @@ export class LoginComponent implements OnDestroy {
 
   showPassword: boolean = false;
 
-  constructor(private _fb: FormBuilder, public _authService: AuthService){
+  constructor(
+    private _fb: FormBuilder, 
+    private _authService: AuthService, 
+    private _store: Store,
+
+    ){
     
     this.form = this._fb.group({
       username: ['', [Validators.required, UsernameValidators.cannotContainSpace],],
@@ -57,6 +65,12 @@ export class LoginComponent implements OnDestroy {
   this.error = false;
   
   this._authService.login(this.usernameControl.value, this.passwordControl.value);
+
+  let credential = {
+    username: this.usernameControl.value,
+    password: this.passwordControl.value } as LoginInfo
+
+  this._store.dispatch(startLogin({credential}));
 
   this._authService.errorStatus$.pipe(
     takeUntil(this.destroySubject)
